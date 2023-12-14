@@ -2,6 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="justify-content-center">
             <img src="profileImages/opdebootmetsha.jpeg" class="img-fluid col-12" alt="profile picture of {{ Auth::user()->name }}">
@@ -9,7 +10,7 @@
 <div class="container mt-2">
     <div class="row m-auto ">
         <!-- displays the name of the user -->
-        <h3 class="col-8 m-auto">{{ Auth::user()->name }}</h3>
+        <h3 class="col-8 m-auto">{{ $user->name }}</h3>
         <!-- this button is to turn on edit mode and makes the user able to change certain information displayed on the profile page,
     this also enables the save button -->
         <button type="button" class="btn btn-success btn-sm col-4">Edit</button>
@@ -29,7 +30,7 @@ class to make list that we needed for our design -->
                             Followers
                         </div>
                         <div class="col">
-                          2800000000
+                          {{$user->followersCount}}
                         </div>
                 </div>
             </li>
@@ -40,7 +41,7 @@ class to make list that we needed for our design -->
                             Punten
                         </div>
                         <div class="col">
-                          820000000
+                          {{ $user->points }}
                         </div>
                 </div>
             </li>
@@ -51,7 +52,7 @@ class to make list that we needed for our design -->
                             Favoriete circuit
                         </div>
                         <div class="col">
-                          peaches garden
+                          {{ $user->favorite_circuit }}
                         </div>
                 </div>
             </li>
@@ -59,10 +60,10 @@ class to make list that we needed for our design -->
             <li class="list-group-item">
                     <div class="row">
                         <div class="col">
-                            Highest finnish
+                            Best finnish
                         </div>
                         <div class="col">
-                          1st
+                          {{ $user->best_finnish }}
                         </div>
                 </div>
             </li>
@@ -73,7 +74,7 @@ class to make list that we needed for our design -->
                             Date of birth
                         </div>
                         <div class="col">
-                          02/11/1999
+                          {{ $user->birth_date }}
                         </div>
                 </div>
             </li>
@@ -86,7 +87,9 @@ class to make list that we needed for our design -->
                           <h5>Bio</h5>
                         </div>
                         <div class="row text-center">
-                          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum culpa soluta nemo, nihil, consequuntur alias ipsa maxime dicta dolores et cum necessitatibus. Minus dignissimos perspiciatis voluptas neque dolorem adipisci odit?</p>
+                            <p>
+                                {{ $user->bio }}
+                            </p>
                         </div>
                 </div>
             </li>

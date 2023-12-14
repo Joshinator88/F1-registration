@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->integer('followersCount');
+            $table->integer('followersCount')->nullable();
             $table->integer('points');
             $table->string('favorite_circuit');
             $table->integer('best_finnish');
