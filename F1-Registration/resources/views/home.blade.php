@@ -5,7 +5,7 @@
 
 <div class="container">
     <div class="justify-content-center">
-            <img src="profileImages/opdebootmetsha.jpeg" class="img-fluid col-12" alt="profile picture of {{ Auth::user()->name }}">
+            <img src="{{ public_path('profileImages/opdebootmetsha.jpeg') }}" class="img-fluid col-12" alt="profile picture of {{ Auth::user()->name }}">
         
 <div class="container mt-2">
     <div class="row m-auto ">
@@ -13,7 +13,9 @@
         <h3 class="col-8 m-auto">{{ $user->name }}</h3>
         <!-- this button is to turn on edit mode and makes the user able to change certain information displayed on the profile page,
     this also enables the save button -->
-        <button type="button" class="btn btn-success btn-sm col-4">Edit</button>
+        <a href="/home/edit" class="col-4">
+            <button type="button" class="btn btn-success btn-sm col-12">Edit</button>
+        </a>
     </div>
 </div>
 
