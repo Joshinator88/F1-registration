@@ -7,7 +7,6 @@
 <form method="post" enctype="multipart/form-data">
     @csrf
   Select image to upload:
-<?php var_dump($_FILES) ?>
   <input type="file" name="profilePicture" id="fileToUpload">
   <input type="submit" value="Upload Image" name="submit">
 </form> 
