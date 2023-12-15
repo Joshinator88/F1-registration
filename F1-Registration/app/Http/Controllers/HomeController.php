@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Auth\SessionGuard;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class HomeController extends Controller
 {
@@ -34,9 +35,13 @@ class HomeController extends Controller
     public function edit()
     {
 
-        return view('home-edit', [
-            'user' => Auth::user(),
- 
-        ]);
+        // when the submit button is pressed then the image gets moved to storage/app/profilePictures/{nameofthefile}
+        if (isset($_POST['submit'])){
+            move_uploaded_file($_FILES['profilePicture']['tmp_name'], storage_path('app/profilePictures/' . $_FILES['profilePicture']['name']));
+        }
+            return view('home-edit', [
+                'user' => Auth::user(),
+            ]);
+        
     }
 }

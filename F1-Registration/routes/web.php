@@ -31,3 +31,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/home/edit', [App\Http\Controllers\HomeController::class, 'edit'])->name('home-edit');
+
+Route::post('/home/edit', [App\Http\Controllers\HomeController::class, 'edit'])->name('home-edit');
