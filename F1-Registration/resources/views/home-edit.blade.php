@@ -3,10 +3,10 @@
 @section('content')
 
 <!-- form waar de gebruiker zijn naam, favoriete circuit, geboorte datum en bio kan aanpassen -->
-
+<?php var_dump($ogExtension); ?>
 <form method="post" enctype="multipart/form-data">
     @csrf
-  Select image to upload:
+  <label for="profilePicture">upload hier uw profielfoto:</label>
   <input type="file" name="profilePicture" id="fileToUpload">
   <input type="submit" value="Upload Image" name="submit">
 </form> 
