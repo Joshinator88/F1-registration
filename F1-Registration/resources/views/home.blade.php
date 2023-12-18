@@ -2,11 +2,12 @@
 @extends('layouts.app')
 
 @section('content')
+<?php $profileImage = storage_path('app\profilePictures\\' ) . $user->id . 'profile.jpeg'; ?>
 
 <div class="container">
     <div class="justify-content-center">
-            <img src="{{ public_path('profileImages/opdebootmetsha.jpeg') }}" class="img-fluid col-12" alt="profile picture of {{ Auth::user()->name }}">
-        
+            <img src="{{ $profileImage }}" class="img-fluid col-12" alt="profile picture of {{ $profileImage }}">
+</div>        
 <div class="container mt-2">
     <div class="row m-auto ">
         <!-- displays the name of the user -->

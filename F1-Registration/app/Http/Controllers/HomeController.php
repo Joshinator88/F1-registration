@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Console\Input\Input;
@@ -56,6 +57,7 @@ class HomeController extends Controller
         }
             return view('home-edit', [
                 'user' => Auth::user(),
+                'profile' => Profile::where('user_id', Auth::user())
             ]);
         
     }
