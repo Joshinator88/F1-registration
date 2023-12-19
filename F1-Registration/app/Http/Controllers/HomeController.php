@@ -83,8 +83,9 @@ class HomeController extends Controller
 
         // when the submit button is pressed then the image gets moved to storage/app/profilePictures/{nameofthefile}
         if (isset($_POST['saveButton'])){
-
+            
             $ogExtension = "";
+            $extension = "";
             
         //    We are storing the extension in the ogExtension variable to later give the name and check if it is a supported mime
             if ($request->profilePicture !== null){
@@ -94,6 +95,7 @@ class HomeController extends Controller
 
                 // check if mime is valid
                 if (in_array(strtolower($ogExtension), $allExtensions)) {
+                    $extension = $ogExtension;
 
                     // making a name for the file based on user id
                     $nameFile = Auth::user()->id . "profile." . $ogExtension;     
@@ -103,7 +105,7 @@ class HomeController extends Controller
                 }
             }
 
-          $this->create($request, $ogExtension);
+          $this->create($request, $extension);
           $loggedinUser = Auth::user();
           if ($loggedinUser->profile == null) {
 
