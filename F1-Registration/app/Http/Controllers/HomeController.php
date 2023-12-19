@@ -30,6 +30,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // when the user is registered he has no profile yet, so that is being created here, and then the page is refreshed so the user can access his profile page
         if (Auth::user()->profile == null) {
             $this->newUser();
             echo "<script>location.reload();</script>";
@@ -40,6 +41,7 @@ class HomeController extends Controller
  
         ]);
     }
+    // in this function we create a new profile for the logged in user
     private function newUser() {
         return Profile::create([
             'user_id' => Auth::user()->id,
@@ -48,9 +50,11 @@ class HomeController extends Controller
     }
 
     
-    protected function create(Request $arr, $extension) {
+    private function update(Request $arr, $extension) {
         $userId = Auth::user()->id;
-       
+
+        // when the user updates his profile and does not want to change his profile picture, then the extension is an empty string, 
+        // so when that is the case we do not want to update the profile_picture column 
         if ($extension !== ""){
             DB::table('profiles')
                 ->where('user_id', $userId)
@@ -58,6 +62,7 @@ class HomeController extends Controller
                     'profile_picture' => $extension,
                 ]);
         }
+        // here we update the profile row of the loggedin user, we alter here the: favorite_circuit, birth_date and the bio columns
         DB::table('profiles')
             ->where('user_id', $userId)
             ->update([
@@ -65,7 +70,8 @@ class HomeController extends Controller
                 'birth_date' => $arr['newDateOfBirth'],
                 'bio' => $arr['newBio'],
             ]);
-
+// the user can update his name but it may not be an empty string, so here we only update the 
+// name column in the users table when $arr['newName'] is not an empty string
         if ($arr['newName'] !== "") {
             DB::table('users')
                 ->where('id', $userId)
@@ -81,7 +87,7 @@ class HomeController extends Controller
     public function edit(Request $request)
     {
 
-        // when the submit button is pressed then the image gets moved to storage/app/profilePictures/{nameofthefile}
+        // when the save button is pressed then the the changes made on this page will be updated in the database
         if (isset($_POST['saveButton'])){
             
             $ogExtension = "";
@@ -105,21 +111,19 @@ class HomeController extends Controller
                 }
             }
 
-          $this->create($request, $extension);
-          $loggedinUser = Auth::user();
-          if ($loggedinUser->profile == null) {
-
-          }
+          $this->update($request, $extension);
+          
           return view('home-edit', [
-            'user' => $loggedinUser
+            'user' => Auth::user()
           ]);
             
-            
-        } else if (isset($_POST['resetButton'])) {
+            // when the quit button is pressed then the user is taken to the home page and nothing will be updated in the database
+        } else if (isset($_POST['quitButton'])) {
             return  view('home', [
                 'user' => Auth::user(),
             ]);
         }
+        // when the user navigates to the edit page, we return the edit view
         return  view('home-edit', [
             'user' => Auth::user(),
         ]);

@@ -35,8 +35,8 @@
     </div>
 
     <div class="mb-3 row text-center">
-      <input type="submit" class="btn btn-success col-md-5 col-sm-12 m-auto mb-3" name="saveButton" id="newDateOfBirth" value="Save">
-      <input type="submit" class="btn btn-danger col-md-5 col-sm-12 m-auto mb-3" name="resetButton" id="newDateOfBirth" value="ga terug naar home">
+      <input type="submit" class="btn btn-success col-md-5 col-sm-12 m-auto mb-3" name="saveButton" id="saveButton" value="Save">
+      <input type="submit" class="btn btn-danger col-md-5 col-sm-12 m-auto mb-3" name="quitButton" id="quitButton" value="ga terug naar home">
     </div>
     
   </form> 

@@ -3,6 +3,7 @@
 
 @section('content')
 <?php 
+// here we defined the path to the specific user his profile picture 
 $path = '/profilePictures/' . $user->id . 'profile.' . $user->profile->profile_picture;
 ?>
 
