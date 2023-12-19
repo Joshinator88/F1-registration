@@ -59,7 +59,7 @@
 
                             <div class="row">
                                 <div class="col text-center">
-                                    <button type="submit" class="btn btn-success">
+                                    <button type="submit" class="btn btn-success col-6">
                                         {{ __('Account aanmaken') }}
                                     </button>
                                 </div>
