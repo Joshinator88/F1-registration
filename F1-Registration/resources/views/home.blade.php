@@ -2,11 +2,13 @@
 @extends('layouts.app')
 
 @section('content')
-<?php $profileImage = storage_path('app\profilePictures\\' ) . $user->id . 'profile.jpeg'; ?>
+<?php 
+$path = '/profilePictures/' . $user->id . 'profile.' . $user->profile->profile_picture;
+?>
 
 <div class="container">
     <div class="justify-content-center">
-            <img src="{{ $profileImage }}" class="img-fluid col-12" alt="profile picture of {{ $profileImage }}">
+            <img src="{{ $path }}" class="img-fluid col-12" alt="{{$path}} ">
 </div>        
 <div class="container mt-2">
     <div class="row m-auto ">
@@ -33,7 +35,7 @@ class to make list that we needed for our design -->
                             Followers
                         </div>
                         <div class="col">
-                          {{$user->followersCount}}
+                          {{$user->profile->followersCount}}
                         </div>
                 </div>
             </li>
@@ -55,7 +57,7 @@ class to make list that we needed for our design -->
                             Favoriete circuit
                         </div>
                         <div class="col">
-                          {{ $user->favorite_circuit }}
+                          {{ $user->profile->favorite_circuit }}
                         </div>
                 </div>
             </li>
@@ -66,7 +68,7 @@ class to make list that we needed for our design -->
                             Best finnish
                         </div>
                         <div class="col">
-                          {{ $user->best_finnish }}
+                          {{ $user->profile->best_finnish }}
                         </div>
                 </div>
             </li>
@@ -77,7 +79,7 @@ class to make list that we needed for our design -->
                             Date of birth
                         </div>
                         <div class="col">
-                          {{ $user->birth_date }}
+                          {{ $user->profile->birth_date }}
                         </div>
                 </div>
             </li>
@@ -89,20 +91,15 @@ class to make list that we needed for our design -->
                         <div class="row text-center">
                           <h5>Bio</h5>
                         </div>
-                        <div class="row text-center">
+                        <div class="row text-center border">
                             <p>
-                                {{ $user->bio }}
+                                {{ $user->profile->bio }}
                             </p>
                         </div>
                 </div>
             </li>
 
-            <!-- when edit mode is turned on and items are changed then the save button is enabled and can be used to update the old data with the new data -->
-            <li class="list-group-item">
-                <div class="row text-center">
-                    <button type="button" class="btn btn-success" disabled>Save</button>
-                </div>
-            </li>
+            
 
         </ul>
     </div>

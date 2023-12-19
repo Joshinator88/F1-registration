@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->unique();
+            $table->foreignId('user_id');
             $table->integer('followersCount')->nullable();
             $table->string('profile_picture')->nullable();
             $table->integer('points')->nullable();
