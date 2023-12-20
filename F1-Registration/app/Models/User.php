@@ -49,6 +49,11 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
+    public function race() {
+        return $this->hasMany(Race::class);
+    }
+    
+
     
     
 }
