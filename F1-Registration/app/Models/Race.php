@@ -9,9 +9,9 @@ class Race extends Model
 {
     use HasFactory;
 
-
+// this is to define what we want to store in the resul column
     protected $casts = [
-        'result' => 'time:m-s-t'
+        'result' => 'time: i-s.u'
     ];
 
     public function User() {
