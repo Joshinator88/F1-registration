@@ -53,10 +53,12 @@
                                 @endif
                             </div>
 
-                            <div class="mb-3">
-                                <button type="submit" class="btn btn-success">
-                                    {{ __('Login') }}
-                                </button>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <button type="submit" class="btn btn-success col-6">
+                                        {{ __('Login') }}
+                                    </button>
+                                </div>
                             </div>
                         </form>
                     </div>

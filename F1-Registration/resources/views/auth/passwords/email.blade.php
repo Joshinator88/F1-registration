@@ -30,10 +30,9 @@
                                     @enderror
                                 </div>
 
-
-                            <div class="row mb-0">
+                            <div class="row">
                                 <div class="col text-center">
-                                    <button type="submit" class="btn btn-success">
+                                    <button type="submit" class="btn btn-success col-6">
                                         {{ __('Stuur wachtwoord reset link') }}
                                     </button>
                                 </div>
