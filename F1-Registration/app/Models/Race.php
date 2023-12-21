@@ -9,18 +9,14 @@ class Race extends Model
 {
     use HasFactory;
 
-// this is to define what we want to store in the resul column
-    protected $casts = [
-        'result' => 'time: i-s.u'
-    ];
 
-    public function User() {
+    public function user() {
         return $this->hasOne(User::class);
     }
 
-    public function Circuit() {
-        return $this->hasOne(Circuit::class);
-    }
+   public function race_result() {
+    return $this->hasMany(Race_result::class);
+   }
     
 
 }

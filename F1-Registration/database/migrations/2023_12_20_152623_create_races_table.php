@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('races', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('circuit_id');
-            $table->foreignId('user_id');
-            $table->time('result');
-            $table->boolean('is_valid');
-            $table->timestamp('season');
+            $table->string('circuit');
+            $table->date('start');
+            $table->date('end');
+            $table->timestamps();
+            $table->integer('season');
         });
     }
 

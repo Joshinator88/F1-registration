@@ -35,3 +35,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/home/edit', [App\Http\Controllers\HomeController::class, 'edit'])->name('home-edit');
 
 Route::post('/home/edit', [App\Http\Controllers\HomeController::class, 'edit'])->name('home-edit');
+
+Route::get('/uploadrace', [App\Http\Controllers\RaceResultController::class, 'index']);
+
+Route::post('/uploadrace', [App\Http\Controllers\RaceResultController::class, 'store']);

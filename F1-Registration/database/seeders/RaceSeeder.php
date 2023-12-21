@@ -13,5 +13,6 @@ class RaceSeeder extends Seeder
     public function run(): void
     {
         //
+        
     }
 }

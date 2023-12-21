@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('circuits', function (Blueprint $table) {
+        Schema::create('race_results', function (Blueprint $table) {
             $table->id();
-            $table->string('circuit');
+            $table->foreignId('user_id');
+            $table->foreignId('race_id');
+            $table->decimal('seconds', 8, 3);
+            $table->boolean('is_valid');
+            $table->string('pictureName')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('circuits');
+        Schema::dropIfExists('race_results');
     }
 };
