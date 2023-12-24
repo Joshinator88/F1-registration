@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('race_id');
             $table->decimal('seconds', 8, 3);
             $table->boolean('is_valid');
-            $table->string('pictureName')->nullable();
+            $table->string('picture_name')->nullable();
             $table->timestamps();
         });
     }

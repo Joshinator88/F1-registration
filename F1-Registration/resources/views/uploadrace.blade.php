@@ -2,12 +2,12 @@
 @extends('layouts.app')
 
 @section('content')
-
-<?php if(isset($error)) { ?>
-  <div class="alert alert-danger text-center" role="alert">
+@if (isset($error))
+<div class="alert alert-danger text-center" role="alert">
   {{ $error }}
 </div>
-<?php } ?>
+
+@endif
 
 <form class="p-3 m-auto col-10 col-lg-8 shadow-lg border-lg" method="post" enctype="multipart/form-data">
     @csrf

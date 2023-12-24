@@ -58,7 +58,7 @@ class RaceResultController extends Controller
     
             DB::table('race_results')
                 ->where('id', $race->id)
-                ->update(['pictureName' => $race->id . '.' . $extension]);
+                ->update(['picture_name' => $race->id . '.' . $extension]);
 
             return view('home', [
                 'user' => Auth::user()
