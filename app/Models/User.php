@@ -46,10 +46,13 @@ class User extends Authenticatable implements CanResetPassword
         'password' => 'hashed',
     ];
 
-    public function profile() {
+    public function profile()
+    {
         return $this->hasOne(Profile::class);
     }
 
-
-
+    public function race()
+    {
+        return $this->hasMany(Race::class);
+    }
 }
