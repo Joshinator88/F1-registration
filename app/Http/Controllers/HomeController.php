@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profile;
+use App\Models\Race_result;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -36,10 +38,18 @@ class HomeController extends Controller
             echo "<script>location.reload();</script>";
         }
 
-        return view('home', [
-            'user' => Auth::user(),
- 
-        ]);
+        if (Auth::user()->id == 1) {
+            return view('admin', [
+                'results' => Race_result::with('race')->get()
+                // 'results' => Race_result::where('is_valid', false)->get()
+            ]);
+        } else {
+            return view('home', [
+                'user' => Auth::user(),
+            ]);
+        }
+
+        
     }
     // in this function we create a new profile for the logged in user
     private function newUser() {
