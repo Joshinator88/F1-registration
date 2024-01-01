@@ -51,6 +51,13 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/uploadrace">Upload nieuwe tijd</a>
                         </li>
+`
+<!-- only show the admin link for the admin user -->
+                        @if (Auth::user()->id == 1)
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin">Controle panel</a>
+                        </li>
+                        @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
