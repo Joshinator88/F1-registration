@@ -18,11 +18,14 @@
           <img src="/controlePictures/controlePicture.jpeg" class="col-10 col-sm-4 col-xl-1 mb-2" alt="...">
           <div class="row col-12 col-sm-8">
             <p class="col-4  col-sm-2 m-auto justify-content-center">User: {{ $result->user_id }}</p>
-            <p class="col-4  col-sm-2 m-auto justify-content-center">{{$result->race->circuit}}</p>
+            <p class="col-4  col-sm-2 m-auto justify-content-center">{{ $result->race->circuit }}</p>
+            <!-- calculation to display the time result of the user in minutes, seconds en thousands -->
             <p class="col-4  col-sm-2 m-auto justify-content-center">{{ floor($result->seconds/60) . ':' . $result->seconds%60 . '.' . $result->seconds*1000%1000 }}</p>
             <form method="post" class="">
-              <input class="btn btn-success col-10 mb-2" type="submit" name="Goedgekeurd" value="Goedgekeurd">
-              <input class="btn btn-danger col-10 mt-2" type="submit" name="Afgekeurd" value="Afgekeurd">
+              @csrf
+              <input class="btn btn-success col-10 mb-2" type="submit" name="goedgekeurd" value="goedgekeurd">
+              <input class="btn btn-danger col-10 mt-2" type="submit" name="afgekeurd" value="afgekeurd">
+              <input type="hidden" name="id" value="{{ $result->id }}">
             </form>
           </div>
 
