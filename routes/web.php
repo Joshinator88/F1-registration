@@ -23,6 +23,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/home/edit', [App\Http\Controllers\HomeController::class, 'edit'])->name('home-edit');
-
+Route::get('races',);
+Route::get('/circuit-leaderboard', [\App\Http\Controllers\CircuitLeaderboardController::class, 'index'])->name('circuit-leaderboard');
 Route::get('/uploadrace', [App\Http\Controllers\RaceResultController::class, 'index']);
 Route::post('/uploadrace', [App\Http\Controllers\RaceResultController::class, 'store']);

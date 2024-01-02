@@ -13,6 +13,7 @@ class Race_result extends Model
         'user_id',
         'race_id',
         'seconds',
+        'points',
         'is_valid',
         'profile_picture'
     ];

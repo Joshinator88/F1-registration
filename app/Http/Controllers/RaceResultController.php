@@ -48,6 +48,7 @@ class RaceResultController extends Controller
         $user = Auth::user()->id;
         $extension = $request->controlPicture->extension();
         $allExtensions = ['jpg', 'png', 'jpeg', 'svg'];
+        // check if the mime type is valid
         if (in_array(strtolower($extension), $allExtensions)) {
             $race = Race_result::create([
                 'user_id' => $user,
