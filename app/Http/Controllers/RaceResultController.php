@@ -19,7 +19,7 @@ class RaceResultController extends Controller
     public function index()
     {
         //here we select the race that can be driven on the current date
-        $date = '2024-03-18';
+        $date = Carbon::now();
         $getRow = DB::table('races')
             ->whereRaw('`start`<=? and end>=?', [$date, $date])
             ->first();
@@ -55,7 +55,7 @@ class RaceResultController extends Controller
                 'seconds' => $time,
                 'is_valid' => false,
             ]);
-    
+
             DB::table('race_results')
                 ->where('id', $race->id)
                 ->update(['picture_name' => $race->id . '.' . $extension]);
@@ -74,12 +74,12 @@ class RaceResultController extends Controller
                 'race' => $getRow,
                 'error' => "you can only upload: 'jpg', 'png', 'jpeg', 'svg'"
             ]);
-            
+
         }
 
-        
 
-        
+
+
     }
 
     /**
