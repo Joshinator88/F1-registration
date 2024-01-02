@@ -80,6 +80,8 @@ class UploadRaceController extends Controller
 
     private function recalculateScore($id)
     {
+        // the race leaderboard has to be sorted on time. on that sorted leaderboard the points get assigned.
+        // so we check the race id and limit the points to max 10 records ordered by ascending.
         $raceResults = Race_result::where('race_id', $id)->limit(10)->orderBy('seconds', 'asc')->get();
         if(isset($raceResults[0])){$raceResults[0]->points = 25;}
         if(isset($raceResults[1])){$raceResults[1]->points = 18;}
@@ -92,6 +94,7 @@ class UploadRaceController extends Controller
         if(isset($raceResults[8])){$raceResults[8]->points = 2;}
         if(isset($raceResults[9])){$raceResults[9]->points = 1;}
         foreach ($raceResults as $key => $result) {
+            // we assign 0 points if the result is not in the top 10 scores.
             if ($key >= 10) {
                 $result->points = 0;
             }
