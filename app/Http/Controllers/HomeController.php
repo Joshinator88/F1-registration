@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -35,11 +36,10 @@ class HomeController extends Controller
             $this->newUser();
             echo "<script>location.reload();</script>";
         }
-
-        return view('home', [
-            'user' => Auth::user(),
- 
-        ]);
+            return view('home', [
+                'user' => Auth::user(),
+            ]);
+        
     }
     // in this function we create a new profile for the logged in user
     private function newUser() {

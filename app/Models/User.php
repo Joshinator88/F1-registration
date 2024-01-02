@@ -50,9 +50,8 @@ class User extends Authenticatable implements CanResetPassword
     {
         return $this->hasOne(Profile::class);
     }
-
-    public function race()
-    {
-        return $this->hasMany(Race::class);
+  
+    public function race_result() {
+        return $this->hasMany(Race_result::class);
     }
 }

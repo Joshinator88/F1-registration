@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -30,3 +30,7 @@ Route::get('races', [App\Http\Controllers\RaceController::class, 'index'])->name
 
 Route::get('/uploadrace', [App\Http\Controllers\UploadRaceController::class, 'index']);
 Route::post('/uploadrace', [App\Http\Controllers\UploadRaceController::class, 'store']);
+
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index']);
+
+Route::post('/admin', [App\Http\Controllers\AdminController::class, 'update']);
