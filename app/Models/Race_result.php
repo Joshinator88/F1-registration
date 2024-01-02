@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\RaceController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Race_result extends Model
 {
@@ -24,11 +27,11 @@ class Race_result extends Model
     ];
 
     public function race() {
-        return $this->hasOne(Race::class);
+        return $this->belongsTo(Race::class, 'race_id', 'id');
     }
 
     public function user() {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id' );
     }
-
 }
+

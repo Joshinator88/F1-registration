@@ -16,10 +16,11 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($raceResults as $index => $result)
+
+                        @foreach($raceResults as $key => $result)
                             <tr>
-                                <th scope="row">{{ $index = 1 }}</th>
-                                <td>{{ $result->user_id}}</td>
+                                <th scope="row">{{$key +1}}</th>
+                                <td>{{ $result->user->name}}</td>
                                 <td>{{ $result->seconds}}</td>
                                 <td>{{ $result->points }}</td>
                             </tr>

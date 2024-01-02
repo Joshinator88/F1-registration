@@ -13,7 +13,8 @@ class RaceController extends Controller
      */
     public function index()
     {
-        //
+        $races = Race::all();
+        return view('races',['races' => $races]);
     }
 
     /**
@@ -35,15 +36,14 @@ class RaceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Race $race)
+    public function show()
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Race $race)
+    public function edit()
     {
         //
     }
