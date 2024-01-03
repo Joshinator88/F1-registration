@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Race_result;
+use App\Models\RaceResult;
 use App\Http\Requests\StoreRace_resultRequest;
 use App\Http\Requests\UpdateRace_resultRequest;
 use Carbon\Carbon as CarbonCarbon;
@@ -51,7 +51,7 @@ class UploadRaceController extends Controller
         $allExtensions = ['jpg', 'png', 'jpeg', 'svg'];
         // check if the mime type is valid
         if (in_array(strtolower($extension), $allExtensions)) {
-            $raceResult = Race_result::where('user_id', $userId)->where('race_id', $raceId)->first();
+            $raceResult = RaceResult::where('user_id', $userId)->where('race_id', $raceId)->first();
             if ($raceResult) {
                 if ($raceResult->seconds < $time) {
                     return back()->withErrors(['de tijd die je probeert te uploaden is langzamer dan je huidige tijd'])->withInput();
@@ -63,7 +63,7 @@ class UploadRaceController extends Controller
                 ]);
 
             } else {
-                $raceResult = Race_result::create([
+                $raceResult = RaceResult::create([
                     'user_id' => $userId,
                     'race_id' => $raceId,
                     'seconds' => $time,
@@ -96,7 +96,7 @@ class UploadRaceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Race_result $race_result)
+    public function show(RaceResult $race_result)
     {
         //
     }
@@ -104,7 +104,7 @@ class UploadRaceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Race_result $race_result)
+    public function edit(RaceResult $race_result)
     {
         //
     }
@@ -112,7 +112,7 @@ class UploadRaceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRace_resultRequest $request, Race_result $race_result)
+    public function update(UpdateRace_resultRequest $request, RaceResult $race_result)
     {
         //
     }
@@ -120,7 +120,7 @@ class UploadRaceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Race_result $race_result)
+    public function destroy(RaceResult $race_result)
     {
         //
     }

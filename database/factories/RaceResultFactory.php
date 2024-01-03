@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Race_result>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\RaceResult>
  */
 class RaceResultFactory extends Factory
 {
@@ -17,7 +17,8 @@ class RaceResultFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'is_valid' => true,
+            'seconds' => fake()->randomFloat('3', '0', '120',)
         ];
     }
 }

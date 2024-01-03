@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\Race_result;
+use App\Models\RaceResult;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
@@ -19,7 +19,7 @@ class RaceResultPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Race_result $raceResult): bool
+    public function view(User $user, RaceResult $raceResult): bool
     {
         //
     }
@@ -35,7 +35,7 @@ class RaceResultPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Race_result $raceResult): bool
+    public function update(User $user, RaceResult $raceResult): bool
     {
         //
     }
@@ -43,7 +43,7 @@ class RaceResultPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Race_result $raceResult): bool
+    public function delete(User $user, RaceResult $raceResult): bool
     {
         //
     }
@@ -51,7 +51,7 @@ class RaceResultPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Race_result $raceResult): bool
+    public function restore(User $user, RaceResult $raceResult): bool
     {
         //
     }
@@ -59,7 +59,7 @@ class RaceResultPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Race_result $raceResult): bool
+    public function forceDelete(User $user, RaceResult $raceResult): bool
     {
         //
     }

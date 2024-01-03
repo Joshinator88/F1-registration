@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
-class Race_result extends Model
+class RaceResult extends Model
 {
     use HasFactory;
 
+    protected $table = 'race_results';
     protected $fillable = [
         'user_id',
         'race_id',
@@ -26,12 +27,14 @@ class Race_result extends Model
         'result' => 'time: i-s.u'
     ];
 
-    public function race() {
+    public function race()
+    {
         return $this->belongsTo(Race::class, 'race_id', 'id');
     }
 
-    public function user() {
-        return $this->belongsTo(User::class, 'user_id', 'id' );
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }
 

@@ -4,7 +4,7 @@
     <div class="container">
         <div class="card custom-card">
             <div class="card-body">
-                <h5 class="card-title text-center">Race Results abu dhabi</h5>
+                <h5 class="card-title text-center">Leaderboard {{$race->circuit}}</h5>
                 <div class="table-responsive">
                     <table class="table table-hover table-bordered table-striped table-dark">
                         <thead>

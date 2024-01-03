@@ -5,7 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Race;
-use App\Models\Race_result;
+use App\Models\RaceResult;
 use App\Models\User;
 use Database\Factories\RaceFactory;
 use Illuminate\Database\Seeder;
@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
             'season' => 2024
         ]);
 
-        Race_result::create([
+        RaceResult::create([
             'user_id' => '2',
             'race_id' => '2',
             'seconds' => '84.123',
@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
             'is_valid' => '0',
         ]);
 
-        Race_result::create([
+        RaceResult::create([
             'user_id' => '3',
             'race_id' => '2',
             'seconds' => '65.222',
@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
             'is_valid' => '0',
         ]);
 
-        Race_result::create([
+        RaceResult::create([
             'user_id' => '4',
             'race_id' => '2',
             'seconds' => '68.985',
