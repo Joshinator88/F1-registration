@@ -28,8 +28,8 @@ Route::get('/races/{id}/result', [App\Http\Controllers\RaceResultController::cla
 Route::get('races', [App\Http\Controllers\RaceController::class, 'index'])->name('races');
 
 
-Route::get('/uploadrace', [App\Http\Controllers\UploadRaceController::class, 'index']);
-Route::post('/uploadrace', [App\Http\Controllers\UploadRaceController::class, 'store']);
+Route::get('/uploadrace', [App\Http\Controllers\UploadRaceController::class, 'index'])->name('upload.index');
+Route::post('/uploadrace', [App\Http\Controllers\UploadRaceController::class, 'store'])->name('upload.store');
 
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index']);
 

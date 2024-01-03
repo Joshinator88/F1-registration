@@ -6,7 +6,15 @@
 <div class="alert alert-danger text-center" role="alert">
   {{ $error }}
 </div>
-
+@endif
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
 @endif
 
 <form class="p-3 m-auto col-10 col-lg-8 shadow-lg border-lg" method="post" enctype="multipart/form-data">
