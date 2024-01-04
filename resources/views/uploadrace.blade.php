@@ -6,13 +6,21 @@
 <div class="alert alert-danger text-center" role="alert">
   {{ $error }}
 </div>
-
+@endif
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
 @endif
 
 <form class="p-3 m-auto col-10 col-lg-8 shadow-lg border-lg" method="post" enctype="multipart/form-data">
     @csrf
     <!-- hier komt de naam van de huidige race -->
-    <h3 class="title text-center">Upload een tijd voor: {{ $race->circuit }}</h3> 
+    <h3 class="title text-center">Upload een tijd voor: {{ $race->circuit }}</h3>
     <div class="mb-3">
       <div class="row">
 
@@ -32,13 +40,13 @@
             <label for="thousands" class="form-label ms-1">Mili seconden: </label>
             <input type="number" class="form-control" min="0" max="9999" name="thousands">
         </div>
-        
+
       </div>
-        
+
     </div>
-    
+
     <div class="mb-3">
-    <!-- een file input field waar een user een bewijs foto kan uploaden, 
+    <!-- een file input field waar een user een bewijs foto kan uploaden,
     de div onderin beschrijft waar de user op moet letten bij het maken van de foto  -->
       <label for="controlPicture" class="form-label">Als bewijs, upload hier een selfie met uw resultaten</label>
       <input type="file" class="form-control" name="controlPicture" id="controlPicture" aria-describedby="pictureHelp" required>
@@ -47,8 +55,7 @@
     <div class="text-center">
         <input type="submit" name="submit" class="btn btn-primary col-10 col-md-6 text-center" id="submit" value="Opslaan">
     </div>
-    
-</form>
 
+</form>
 
 @endsection
