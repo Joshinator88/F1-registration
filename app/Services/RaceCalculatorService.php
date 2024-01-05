@@ -6,7 +6,7 @@ use App\Models\RaceResult;
 
 class RaceCalculatorService
 {
-   public function recalculateScore($raceId)
+    public function recalculateScore($raceId)
     {
         // the race leaderboard has to be sorted on time. on that sorted leaderboard the points get assigned.
         // so we check the race id and limit the points to max 10 records ordered by ascending.
@@ -28,5 +28,19 @@ class RaceCalculatorService
             }
             $result->save();
         }
+    }
+
+    public function calculateLeaderboard()
+    {
+        $leaderboards = RaceResult::select('user_id', 'points')->orderByDesc('points')->get();
+        $leaderboardResult = [];
+
+        foreach ($leaderboards as $result) {
+            $leaderboardResult[$result->user->name] = ($leaderboardResult[$result->user->name] ?? 0) + $result->points;
+        }
+
+        arsort($leaderboardResult);
+
+        return $leaderboardResult;
     }
 }

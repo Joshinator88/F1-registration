@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\RaceResult;
+use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

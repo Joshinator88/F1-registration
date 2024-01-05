@@ -50,14 +50,18 @@
                             </li>
                         @endif
                     @else
+                        {{-- we wanted to show the current year of the season --}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/leaderboard">Leaderboard
+                                Season {{ Carbon\Carbon::now()->year }}</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/races">bekijk race overzicht</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/uploadrace">Upload nieuwe tijd</a>
                         </li>
-
-                        <!-- only show the admin link for the admin user -->
+                        {{-- only show the admin link for the admin user --}}
                         @if (Auth::user()->id == 1)
                             <li class="nav-item">
                                 <a class="nav-link" href="/admin">Controle panel</a>
