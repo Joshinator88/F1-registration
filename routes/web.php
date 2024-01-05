@@ -26,7 +26,9 @@ Route::get('/home/edit', [App\Http\Controllers\HomeController::class, 'edit'])->
 Route::post('/home/edit', [App\Http\Controllers\HomeController::class, 'edit'])->name('home-edit');
 
 Route::get('/races/{id}/result', [App\Http\Controllers\RaceResultController::class, 'index'])->name('races-id');
-Route::get('races', [App\Http\Controllers\RaceController::class, 'index'])->name('races');
+Route::get('/races', [App\Http\Controllers\RaceController::class, 'index'])->name('races');
+
+Route::get('/leaderboard', [App\Http\Controllers\LeaderboardController::class, 'index'])->name('leaderboard.index');
 
 
 Route::get('/uploadrace', [App\Http\Controllers\UploadRaceController::class, 'index'])->name('upload.index');
