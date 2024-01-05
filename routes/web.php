@@ -22,6 +22,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home/edit', [App\Http\Controllers\HomeController::class, 'edit'])->name('home-edit');
 Route::post('/home/edit', [App\Http\Controllers\HomeController::class, 'edit'])->name('home-edit');
 
 Route::get('/races/{id}/result', [App\Http\Controllers\RaceResultController::class, 'index'])->name('races-id');
@@ -31,6 +32,5 @@ Route::get('races', [App\Http\Controllers\RaceController::class, 'index'])->name
 Route::get('/uploadrace', [App\Http\Controllers\UploadRaceController::class, 'index'])->name('upload.index');
 Route::post('/uploadrace', [App\Http\Controllers\UploadRaceController::class, 'store'])->name('upload.store');
 
-Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index']);
-
-Route::post('/admin', [App\Http\Controllers\AdminController::class, 'update']);
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
+Route::post('/admin', [App\Http\Controllers\AdminController::class, 'update'])->name('admin.update');
