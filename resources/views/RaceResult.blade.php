@@ -1,4 +1,3 @@
-use App\Models\RaceResult;
 @extends('layouts.app')
 
 @section('content')
@@ -34,6 +33,40 @@ use App\Models\RaceResult;
         </div>
     </div>
     <div class="container">
-        <script>console.log([].concat(@json($raceResultsUser)))</script>
+        <canvas id="myChart">
+
+        </canvas>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            let string = [].concat(@json($raceResultsUser));
+            let objects = JSON.parse(string);
+            let times = [];
+            let dates = [];
+            objects.forEach((object) => {
+                times.push(object['seconds'])
+                dates.push(object['created_at'].substring(0, 9))
+            });
+            const chart = document.getElementById('myChart');
+
+            new Chart(chart, {
+                type: 'line',
+                data: {
+                labels: dates,
+                datasets: [{
+                    label: 'performance in seconds',
+                    data: times,
+                    borderWidth: 1
+                }]
+                },
+                options: {
+                scales: {
+                    y: {
+                    beginAtZero: true
+                    }
+                }
+                }
+        });
+
+        </script>
     </div>
 @endsection
