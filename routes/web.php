@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,15 @@ Route::post('/uploadrace', [App\Http\Controllers\UploadRaceController::class, 's
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index']);
 
 Route::post('/admin', [App\Http\Controllers\AdminController::class, 'update']);
+
+Route::get('/users', function () {
+    return view('users', [
+        'users' => User::with('profile')->get()
+    ]);
+});
+
+Route::get('user/{user}', function (User $user) {
+    return view('visit', [
+        'user' => $user
+    ]);
+});

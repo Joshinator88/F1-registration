@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Race;
 use App\Models\RaceResult;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RaceResultController extends Controller
 {
@@ -15,6 +17,11 @@ class RaceResultController extends Controller
         // i wanted to get the race results and order them from highest to lowest amount of points,
         // i also chose to limit the amount of records to 10 because the lowest amount of points is assigned to the 10th place in f1.
         $raceResults = RaceResult::where('race_id', $id)->limit(10)->orderBy('points', 'desc')->get();
-        return view('RaceResult', compact('raceResults', 'race'));
+        // Get all the race results of the logged in user and send encode it as json so that we can use it in javascript and make a graph
+        $raceResultsUser = json_encode(DB::table('race_results')
+            ->where('race_id', $race->id)
+            ->where('user_id', Auth::user()->id)
+            ->get());
+        return view('RaceResult', compact('raceResults', 'race', 'raceResultsUser'));
     }
 }

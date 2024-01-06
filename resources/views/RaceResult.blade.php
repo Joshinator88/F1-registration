@@ -1,3 +1,4 @@
+use App\Models\RaceResult;
 @extends('layouts.app')
 
 @section('content')
@@ -31,5 +32,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="container">
+        <script>console.log([].concat(@json($raceResultsUser)))</script>
     </div>
 @endsection
