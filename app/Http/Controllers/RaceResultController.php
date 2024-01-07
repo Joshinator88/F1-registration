@@ -21,7 +21,9 @@ class RaceResultController extends Controller
         $raceResultsUser = json_encode(DB::table('race_results')
             ->where('race_id', $race->id)
             ->where('user_id', Auth::user()->id)
-            ->get());
+            ->where('is_valid', true)
+            ->orderByDesc('created_at')
+            ->get(['created_at', 'seconds']));
         return view('RaceResult', compact('raceResults', 'race', 'raceResultsUser'));
     }
 }
