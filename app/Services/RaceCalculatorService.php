@@ -24,13 +24,20 @@ class RaceCalculatorService
         if(isset($raceResults[7])){$raceResults[7]->points = 4;}
         if(isset($raceResults[8])){$raceResults[8]->points = 2;}
         if(isset($raceResults[9])){$raceResults[9]->points = 1;}
+        $excludedRaceIds = [];
         foreach ($raceResults as $key => $result) {
             // we assign 0 points if the result is not in the top 10 scores.
             if ($key >= 10) {
-                $result->points = 0;
+                break;
             }
+            $excludedRaceIds[] = $result->id;
             $result->save();
         }
+
+        DB::table('race_results')
+            ->whereNotIn('id', $excludedRaceIds)
+            ->where('race_id', $raceId)
+            ->update(['points' => 0]);
     }
 
     public function calculateLeaderboard(): array
