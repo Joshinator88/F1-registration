@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Race;
 use App\Models\RaceResult;
 use App\Models\User;
+use App\Models\Profile;
 use Database\Factories\RaceFactory;
 use Illuminate\Database\Seeder;
 
@@ -17,6 +18,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         User::factory(15)->create();
+         $users = User::factory(15)->create();
+
+         foreach($users as $user) {
+            Profile::create([
+                'user_id' => $user->id
+            ]);
+         }
     }
 }

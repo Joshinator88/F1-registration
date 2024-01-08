@@ -35,6 +35,7 @@ Route::get('/leaderboard', [App\Http\Controllers\LeaderboardController::class, '
 Route::get('/uploadrace', [App\Http\Controllers\UploadRaceController::class, 'index'])->name('upload.index');
 Route::post('/uploadrace', [App\Http\Controllers\UploadRaceController::class, 'store'])->name('upload.store');
 
+Route::get('/search', [App\Http\Controllers\SearchController::class, 'SearchUser']);
 
 Route::get('/users', function () {
     return view('users', [
