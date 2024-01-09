@@ -1,7 +1,7 @@
 <?php
 
 foreach ($users as $user) {
-    var_dump($user->name); 
+    var_dump($user->profile->bio); 
 
 }
 

@@ -11,11 +11,9 @@ class SearchController extends Controller
     //
 
     public function searchUser(Request $request) {
-        return view('found-users', [
-            // 'users' => User::search($request->search)->get()
-            // 'users' => User::with('profile')->where('name', 'LIKE', '%' . $request->search . '%')->get()
-            'users' => DB::table('users')
-                ->where('name', 'LIKE', "%{$request->search}%")
+        return view('users', [
+            'users' => User::with('profile')->where('name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('email', 'LIKE', '%' . $request->search . '%')
                 ->get()
         ]);
         
