@@ -3,11 +3,9 @@
     box-shadow: 0 10px 20px;
     cursor: pointer;
 }
-
 .no-style {
     text-decoration: none;
 }
-
 .card-races{
     height: 360px;
     width: 400px;

@@ -1,10 +1,24 @@
 @extends ('layouts.app')
 <link rel="stylesheet" href="{{asset('css/app.css')}}">
 
+
 @section ('content')
+<div class="container">
+    <form class="form-inline" method="get" action="/search">
+        @csrf
+        <div class="row">
+            <div class="col-sm-10">
+                <input class="form-control inline mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
+            </div>
+            <button class="col btn btn-outline-success m-2 my-sm-0" type="submit">Search</button>
+        </div>
+    </form>
+</div>
 
 <div class="container">
-    <div class="row justify-content-center">
+
+    
+    <div class="row red justify-content-center">
 
 
 @foreach($users as $user)
@@ -14,7 +28,7 @@
 $path = '/profilePictures/' . $user->id . 'profile.' . $user->profile?->profile_picture;
 ?>
 
-    <div class="col-sm-8 col-lg-4 mb-3">
+    <div class="col-sm-8 col-lg-4 my-2">
         <a class="no-style" href="/user/{{ $user->id }}">
         <div class="card">
     
