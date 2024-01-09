@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -18,9 +19,9 @@
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-light shadow-sm navbarglobal">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/home') }}">
+            <a class="navbar-brand text-white" href="{{ url('/home') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -40,34 +41,34 @@
                     @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                         @endif
 
                         @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @endif
                     @else
                         {{-- we wanted to show the current year of the season --}}
                         <li class="nav-item">
-                            <a class="nav-link" href="/leaderboard">Leaderboard
+                            <a class="nav-link text-white" href="/leaderboard">Leaderboard
                                 Season {{ Carbon\Carbon::now()->year }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/races">bekijk race overzicht</a>
+                            <a class="nav-link text-white" href="/races">bekijk race overzicht</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/uploadrace">Upload nieuwe tijd</a>
+                            <a class="nav-link text-white" href="/uploadrace">Upload nieuwe tijd</a>
                         </li>
                         {{-- only show the admin link for the admin user --}}
                         @if (Auth::user()->id == 1)
                             <li class="nav-item">
-                                <a class="nav-link" href="/admin">Controle panel</a>
+                                <a class="nav-link text-white" href="/admin">Controle panel</a>
                             </li>
                         @endif
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown ">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
