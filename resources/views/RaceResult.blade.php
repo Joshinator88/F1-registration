@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="container">
-        <div class="card custom-card">
-            <div class="card-body">
-                <h5 class="card-title text-center">Leaderboard {{$race->circuit}}</h5>
-                <div class="table-responsive">
+        <div class="card">
+            <div class="card-body result-style">
+                <h5 class="card-title text-center text-white">Leaderboard {{$race->circuit}}</h5>
+                <div class="table-responsive mt-3">
                     <table class="table table-hover table-bordered table-striped table-dark">
                         <thead>
                         <tr>
