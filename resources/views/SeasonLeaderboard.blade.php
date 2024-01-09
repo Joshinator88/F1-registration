@@ -4,7 +4,7 @@
     <div class="container">
         <div class="card custom-card">
             <div class="card-body">
-                <h5 class="card-title text-center">Leaderboard season 2024</h5>
+                <h5 class="card-title text-center">Leaderboard season {{ \Carbon\Carbon::now()->year }}</h5>
                 <div class="table-responsive">
                     <table class="table table-hover table-bordered table-striped table-dark">
                         <thead>
@@ -15,15 +15,13 @@
                         </tr>
                         </thead>
                         <tbody>
-
                         @foreach($leaderboard as $userName => $points)
                             <tr>
-                                <th scope="row"> {{$loop->index}}</th>
+                                <th scope="row"> {{$loop->index + 1}}</th>
                                 <td>{{ $userName}}</td>
                                 <td>{{ $points }}</td>
                             </tr>
                         @endforeach
-
                         </tbody>
                     </table>
                 </div>
