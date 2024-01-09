@@ -17,6 +17,14 @@
 .result-style{
     background-color: #e10600;
 }
-.btn{
+.uploadRaceButton{
     background-color: #e10600;
 }
+.uploadRaceButton:hover{
+    background-color: #bb0c05;
+}
+.jup{
+    background-color: #1a202c;
+    border-color: #e10600;
+}
+

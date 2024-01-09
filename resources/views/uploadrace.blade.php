@@ -57,7 +57,7 @@
             </div>
         </div>
         <div class="text-center">
-            <input type="submit" name="submit" class="btn col-10 col-md-6 text-center text-white" id="submit"
+            <input type="submit" name="submit" class="btn uploadRaceButton col-10 col-md-6 text-center text-white" id="submit"
                    value="Opslaan">
         </div>
 
