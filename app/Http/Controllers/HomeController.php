@@ -39,7 +39,7 @@ class HomeController extends Controller
             return view('home', [
                 'user' => Auth::user(),
             ]);
-        
+
     }
     // in this function we create a new profile for the logged in user
     private function newUser() {
@@ -49,12 +49,12 @@ class HomeController extends Controller
         ]);
     }
 
-    
+
     private function update(Request $arr, $extension) {
         $userId = Auth::user()->id;
 
-        // when the user updates his profile and does not want to change his profile picture, then the extension is an empty string, 
-        // so when that is the case we do not want to update the profile_picture column 
+        // when the user updates his profile and does not want to change his profile picture, then the extension is an empty string,
+        // so when that is the case we do not want to update the profile_picture column
         if ($extension !== ""){
             DB::table('profiles')
                 ->where('user_id', $userId)
@@ -70,7 +70,7 @@ class HomeController extends Controller
                 'birth_date' => $arr['newDateOfBirth'],
                 'bio' => $arr['newBio'],
             ]);
-// the user can update his name but it may not be an empty string, so here we only update the 
+// the user can update his name but it may not be an empty string, so here we only update the
 // name column in the users table when $arr['newName'] is not an empty string
         if ($arr['newName'] !== "") {
             DB::table('users')
@@ -79,20 +79,20 @@ class HomeController extends Controller
                     'name' => $arr['newName']
                 ]);
         }
-           
-            
+
+
     }
-    
+
 
     public function edit(Request $request)
     {
 
         // when the save button is pressed then the the changes made on this page will be updated in the database
         if (isset($_POST['saveButton'])){
-            
+
             $ogExtension = "";
             $extension = "";
-            
+
         //    We are storing the extension in the ogExtension variable to later give the name and check if it is a supported mime
             if ($request->profilePicture !== null){
                 $ogExtension = $request->profilePicture->extension();
@@ -104,7 +104,7 @@ class HomeController extends Controller
                     $extension = $ogExtension;
 
                     // making a name for the file based on user id
-                    $nameFile = Auth::user()->id . "profile." . $ogExtension;     
+                    $nameFile = Auth::user()->id . "profile." . $ogExtension;
                     // taking the uploaded file and storing it in: "public/profilePictures under the predetermined name
                     move_uploaded_file($_FILES['profilePicture']['tmp_name'], 'profilePictures/' . $nameFile);
                     // var_dump($request['newEmail']);
@@ -112,11 +112,11 @@ class HomeController extends Controller
             }
 
           $this->update($request, $extension);
-          
+
           return view('home-edit', [
             'user' => Auth::user()
           ]);
-            
+
             // when the quit button is pressed then the user is taken to the home page and nothing will be updated in the database
         } else if (isset($_POST['quitButton'])) {
             return  view('home', [
@@ -127,6 +127,6 @@ class HomeController extends Controller
         return  view('home-edit', [
             'user' => Auth::user(),
         ]);
-            
+
     }
 }
