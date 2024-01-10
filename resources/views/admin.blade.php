@@ -13,6 +13,7 @@
         <div class="accordion-body">
           @foreach ($races as $race)
             <form action="/addTrophies" class="inline" method="post">
+              @csrf
               <div class="row text-center my-3">
                 <label for="{{$race->circuit}}" class="col-sm-3">{{$race->circuit}}</label>
                 <input name="giveTrophies" value="troffeeën uitdelen" type="submit" class="btn btn-success col-sm-3 m-auto">
