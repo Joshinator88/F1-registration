@@ -26,6 +26,7 @@
               <input class="btn btn-success col-10 mb-2" type="submit" name="goedgekeurd" value="goedgekeurd">
               <input class="btn btn-danger col-10 mt-2" type="submit" name="afgekeurd" value="afgekeurd">
               <input type="hidden" name="id" value="{{ $result->id }}">
+              <input type="hidden" name="race_id" value="{{ $result->race->id }}">
             </form>
           </div>
 

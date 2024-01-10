@@ -57,10 +57,13 @@
                                 Season {{ Carbon\Carbon::now()->year }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="/races">bekijk race overzicht</a>
+                            <a class="nav-link text-white" href="/races">race overzicht</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="/uploadrace">Upload nieuwe tijd</a>
+                            <a class="nav-link text-white" href="/uploadrace">nieuwe tijd</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/users">users</a>
                         </li>
                         {{-- only show the admin link for the admin user --}}
                         @if (Auth::user()->id == 1)
