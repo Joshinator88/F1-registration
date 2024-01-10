@@ -41,7 +41,8 @@ class AdminController extends Controller
         if (isset($request['giveTrophies'])) {
             // only look at the validated races
             // get the top three performers on this circuit and hand them the trophies
-            $raceResults = RaceResult::where('is_valid', true)->orderBy('seconds', 'asc')->groupBy('user_id')->take(3)->get();
+            $raceResultsRaw = RaceResult::where('is_valid', true)->orderBy('seconds', 'asc')->get();
+            $raceResults = $raceResultsRaw->unique('user_id')->take(3)->get();
             // check if there are reccords of trophies in the database, if so update them with new data otherwise create new entries
             if (Trophy::where('race_id', $request['raceId'])->exists()) {
 
