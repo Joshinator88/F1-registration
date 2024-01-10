@@ -17,7 +17,10 @@ class RaceFactory extends Factory
     public function definition(): array
     {
         return [
-
+            'circuit' => fake()->name(),
+            'start' => fake()->date(),
+            'end' => fake()->date(),
+            'season' => fake()->year(),
         ];
     }
 }

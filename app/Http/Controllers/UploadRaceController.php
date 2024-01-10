@@ -43,7 +43,7 @@ class UploadRaceController extends Controller
      */
     public function store(Request $request)
     {
-        // here we calculate the time in thousants so we only have to store whole numbers in the database and need only one column
+        // here we calculate the time in thousands so we only have to store whole numbers in the database and need only one column
         $time = intval($request['minutes']) * 60 + intval($request['seconds']) + intval($request['thousands']) / 1000;
         $userId = Auth::user()->id;
         $raceId = $request['race_id'];
@@ -74,47 +74,7 @@ class UploadRaceController extends Controller
                 ->where('id', $raceResult->id)
                 ->update(['picture_name' => $raceResult->id . '.' . $extension]);
 
-            return view('home', [
-                'user' => Auth::user()
-            ]);
-        } else {
-            $date = '2024-03-18';
-            $getRow = DB::table('races')
-                ->whereRaw('`start`<=? and end>=?', [$date, $date])
-                ->first();
-
-            // and we pas that race object with the array
-            return view('uploadrace', [
-                'race' => $getRow,
-                'error' => "you can only upload: 'jpg', 'png', 'jpeg', 'svg'"
-            ]);
-        }
-    }
-
-
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(RaceResult $race_result)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(RaceResult $race_result)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateRace_resultRequest $request, RaceResult $race_result)
-    {
-        //
+        return redirect(route('home'));
     }
 
     /**
