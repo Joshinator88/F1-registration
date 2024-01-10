@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Race;
 use App\Services\RaceCalculatorService;
 use Illuminate\Support\Facades\Auth;
 use App\Models\RaceResult;
@@ -22,8 +23,13 @@ class AdminController extends Controller
     public function index()
     {
         if (Auth::user()->id == 1) {
+            // $date = Carbon::now();
+            $date = "2024-03-29";
+            $endedRaces = DB::table('races')->whereRaw('`end`<?', [$date])->get();
+
             return view('admin', [
-                'results' => RaceResult::where('is_valid', false)->with('race')->get()
+                'results' => RaceResult::where('is_valid', false)->with('race')->get(),
+                'races' => $endedRaces,
             ]);
         } else {
             return view('home');
@@ -33,31 +39,45 @@ class AdminController extends Controller
     /**
      * a function hand out trophies if they finnished first second or third on a particular circuit.
      */
-    private function trophyCeremony($race_id){
-        $race = DB::table('race')->where('id', $race_id)->first();
-        
-        // check if the race has ended
-        if ($race->end < Carbon::now()) {
-            // check if all races are evaluated by the admin
-            if (DB::table('race_result')->where('race_id', $race_id)->where('is_valid', false)->get() === null) {
-                // get the top three performers on this circuit and hand them the trophies
-                $raceResults = RaceResult::where('race_id', $race_id)->orderBy('seconds', 'asc')->take(3)->get();
-                Trophy::create([
-                    'user_id' => $raceResults[0]->user_id,
-                    'race_id' => $race_id,
-                    'trophy' => "🥇",
-                ]);
-                Trophy::create([
-                    'user_id' => $raceResults[1]->user_id,
-                    'race_id' => $race_id,
-                    'trophy' => "🥈",
-                ]);
-                Trophy::create([
-                    'user_id' => $raceResults[2]->user_id,
-                    'race_id' => $race_id,
-                    'trophy' => "🥉",
-                ]);
-            }
+    public function trophyCeremony(Request $request){
+        // get the race where the trophies are handed out for
+        $race = DB::table('race')->where('id', $request['race_id'])->first();
+
+        // only look at the validated races
+        // get the top three performers on this circuit and hand them the trophies
+        $raceResults = RaceResult::where('is_valid', true)->orderBy('seconds', 'asc')->groupBy('user_id')->take(3)->get();
+        // check if there are reccords of trophies in the database, if so update them with new data otherwise create new entries
+        if (Trophy::where('race_id', $request['race_id'])->exists()) {
+
+            Trophy::where('race_id', $request['race_id'])->update([
+                'user_id' => $raceResults[0]->user_id,
+                'trophy' => "🥇",
+            ]);
+            Trophy::where('race_id', $request['race_id'])->update([
+                'user_id' => $raceResults[1]->user_id,
+                'trophy' => "🥈",
+            ]);
+            Trophy::where('race_id', $request['race_id'])->update([
+                'user_id' => $raceResults[2]->user_id,
+                'trophy' => "🥉 ",
+            ]);
+        } else {
+            
+            Trophy::create([
+                'user_id' => $raceResults[0]->user_id,
+                'race_id' => $request['race_id'],
+                'trophy' => "🥇",
+            ]);
+            Trophy::create([
+                'user_id' => $raceResults[1]->user_id,
+                'race_id' => $request['race_id'],
+                'trophy' => "🥈",
+            ]);
+            Trophy::create([
+                'user_id' => $raceResults[2]->user_id,
+                'race_id' => $request['race_id'],
+                'trophy' => "🥉 ",
+            ]);
         }
     }
 
@@ -75,8 +95,6 @@ class AdminController extends Controller
         } else if (isset($request['afgekeurd'])) {
             DB::table('race_results')->where('id', $request['id'])->delete();
         }
-// call the function to hand out trophies to the top 3 racers
-        $this->trophyCeremony($request['race_id']);
         return view('admin', [
             'results' => RaceResult::where('is_valid', false)->with('race')->get()
         ]);

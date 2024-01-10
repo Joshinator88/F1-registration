@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('race_id');
-            $table->string('trophy');
+            $table->string('trophy')->nullable();
             $table->timestamps();
         });
     }

@@ -19,7 +19,8 @@ class UploadRaceController extends Controller
     public function index()
     {
         //here we select the race that can be driven on the current date
-        $date = Carbon::now();
+        // $date = Carbon::now();
+        $date = "2024-02-29";
         $getRow = DB::table('races')
             ->whereRaw('`start`<=? and end>=?', [$date, $date])
             ->first();
