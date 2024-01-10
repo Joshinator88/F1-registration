@@ -18,12 +18,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         $users = User::factory(15)->create();
-
-         foreach($users as $user) {
-            Profile::create([
-                'user_id' => $user->id
-            ]);
-         }
+        $this->call([
+            UserSeeder::class,
+            RaceSeeder::class
+        ]);
     }
 }

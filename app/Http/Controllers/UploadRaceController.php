@@ -40,32 +40,14 @@ class UploadRaceController extends Controller
             return $this->redirectBackWithErrorMimeTypeInvalid();
         }
 
-        // retrieve the race raceresult
-        $raceResult = RaceResult::where('user_id', $userId)
-            ->where('race_id', $raceId)
-            ->first();
-
         // When the race result is already existant we want to update it to prevent double records from the same user.
-        if (!$raceResult) {
-            $raceResult = RaceResult::create([
-                'user_id' => $userId,
-                'race_id' => $raceId,
-                'seconds' => $time,
-                'is_valid' => false,
-            ]);
-        } else {
-            if ($raceResult->seconds < $time) {
-                return back()->withErrors([
-                    'error' => 'de tijd die je probeert te uploaden is langzamer dan je huidige tijd']
-                )->withInput();
-            }
+        $raceResult = RaceResult::create([
+            'user_id' => $userId,
+            'race_id' => $raceId,
+            'seconds' => $time,
+            'is_valid' => false,
+        ]);
 
-            $raceResult->update([
-                'user_id' => $userId,
-                'seconds' => $time,
-                'is_valid' => false,
-            ]);
-        }
         $this->uploadRaceResultProof($raceResult, $extension, $request);
 
         return redirect(route('home'));

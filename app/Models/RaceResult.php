@@ -24,7 +24,8 @@ class RaceResult extends Model
 
     // this is to define what we want to store in the resul column
     protected $casts = [
-        'result' => 'time: i-s.u'
+        'result' => 'time: i-s.u',
+        'is_valid' => 'boolean',
     ];
 
     public function race()

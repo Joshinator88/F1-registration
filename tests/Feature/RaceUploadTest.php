@@ -20,6 +20,7 @@ class RaceUploadTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $this->withoutExceptionHandling();
         Storage::fake('local');
         $this->login();
         $this->race = $this->createRace();
@@ -38,36 +39,18 @@ class RaceUploadTest extends TestCase
 
         $response->assertStatus(302)->assertSessionDoesntHaveErrors();
         $this->assertDatabaseCount('race_results', 1);
-        $this->assertRaceResultProofUploaded();
+        $this->assertRaceResultProofUploaded(1);
     }
 
-    public function testShouldReturnBackWithErrorsWhenRaceResultIsGreaterThanPreviousRaceResult(): void
-    {
-        RaceResult::factory()->create([
-            'race_id' => $this->race->id,
-            'user_id' => $this->loggedInUser->id,
-            'seconds' => 1,
-        ]);
-        $response = $this->post('/uploadrace', [
-            'minutes' => 1,
-            'seconds' => 22,
-            'thousands' => 123,
-            'race_id' => $this->race->id,
-            'controlPicture' => $this->uploadedFakeFile
-        ]);
-
-        $response->assertStatus(302)
-            ->assertSessionHasErrors('error');
-        $this->assertDatabaseCount('race_results', 1);
-    }
-
-    public function testShouldUpdateRaceResultWhenNewResultIsFasterThanPreviousRaceResult(): void
+    public function testShouldCreateRaceResultWhenNewResultIsFasterThanPreviousRaceResult(): void
     {
         $raceResult = RaceResult::factory()->create([
             'race_id' => $this->race->id,
             'user_id' => $this->loggedInUser->id,
             'seconds' => 999,
+            'points' => 25,
         ]);
+
         $response = $this->post('/uploadrace', [
             'minutes' => 1,
             'seconds' => 22,
@@ -81,14 +64,20 @@ class RaceUploadTest extends TestCase
 
         $raceResult->refresh();
 
-        $this->assertEquals(82.123, $raceResult->seconds);
-        $this->assertDatabaseCount('race_results', 1);
-        $this->assertRaceResultProofUploaded();
+        $raceResults = RaceResult::where('race_id', $this->race->id)->orderBy('seconds', 'asc')->get();
+
+        $this->assertFalse($raceResults[0]->is_valid);
+        $this->assertTrue($raceResults[1]->is_valid);
+
+        $this->assertEquals(999, $raceResult->seconds);
+        $this->assertEquals(25, $raceResult->points);
+        $this->assertDatabaseCount('race_results', 2);
+        $this->assertRaceResultProofUploaded($raceResults[0]->id);
     }
 
-    private function assertRaceResultProofUploaded(): void
+    private function assertRaceResultProofUploaded($raceResult): void
     {
-        $expectedRaceResultFileName = 'raceResultProof/'. $this->race->id . '.' . 'jpg';
+        $expectedRaceResultFileName = 'raceResultProof/'. $raceResult . '.' . 'jpg';
         Storage::assertExists($expectedRaceResultFileName);
     }
 }
