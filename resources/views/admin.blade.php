@@ -1,8 +1,9 @@
 @extends ('layouts.app')
 
 @section('content')
-    <div class="accordion mx-2" id="accordionExample">
+
     @forelse($raceResults as $raceResult)
+    <div class="accordion mx-2" id="accordionExample">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="{{ $raceResult->id }}">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
