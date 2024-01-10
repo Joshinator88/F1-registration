@@ -19,12 +19,10 @@ class AdminController extends Controller
     //
     public function index()
     {
-        if (Auth::user()->id == 1) {
-            return view('admin', [
-                'results' => RaceResult::where('is_valid', false)->with('race')->get()
-            ]);
-        } else {
-            return view('home');
+        if (Auth::user()->admin === true) {
+            $raceResults = RaceResult::where('is_valid', false)->with('race')->get();
+
+            return view('admin', compact('raceResults'));
         }
     }
 
