@@ -50,10 +50,3 @@ Route::get('user/{user}', function (User $user) {
         'user' => $user
     ]);
 });
-
-// testcase routes
-Route::get(' /login', function () {
-    return response()->json([
-        'auth' => true,
-    ]);
-});
