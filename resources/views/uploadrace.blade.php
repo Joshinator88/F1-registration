@@ -50,10 +50,9 @@
             <!-- een file input field waar een user een bewijs foto kan uploaden,
             de div onderin beschrijft waar de user op moet letten bij het maken van de foto  -->
             <label for="controlPicture" class="form-label">Als bewijs, upload hier een selfie met uw resultaten</label>
-            <input type="file" class="form-control" name="controlPicture" id="controlPicture"
-                   aria-describedby="pictureHelp" required>
+            <input type="file" class="form-control" name="controlePicture" id="controlePicture" aria-describedby="pictureHelp" required>
             <div id="pictureHelp" class="form-text">Zorg er voor dat jij zelf, de track en je tijd duidelijk zichtbaar
-                zijn op de foto
+                zijn op de foto en dat de foto een portrait foto is
             </div>
         </div>
         <div class="text-center">

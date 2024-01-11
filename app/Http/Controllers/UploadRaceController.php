@@ -15,8 +15,7 @@ class UploadRaceController extends Controller
     public function index()
     {
         //here we select the race that can be driven on the current date
-        // $date = Carbon::now();
-        $date = "2024-02-29";
+        $date = Carbon::now();
         $getRow = DB::table('races')
             ->whereRaw('`start`<=? and `end`>=?', [$date, $date])
             ->first();
@@ -33,21 +32,37 @@ class UploadRaceController extends Controller
         $time = intval($request['minutes']) * 60 + intval($request['seconds']) + intval($request['thousands']) / 1000;
         $userId = Auth::user()->id;
         $raceId = $request['race_id'];
-        $extension = $request->controlPicture->extension();
+        $extension = $request->controlePicture->extension();
         $allExtensions = ['jpg', 'png', 'jpeg', 'svg'];
 
         // validate if file mime type is valid
         if (!in_array(strtolower($extension), $allExtensions)) {
             return $this->redirectBackWithErrorMimeTypeInvalid();
+        }else {
+            // if the mime is valid then we create a reccord of this result in the db
+            $raceResult = RaceResult::create([
+                'user_id' => $userId,
+                'race_id' => $raceId,
+                'seconds' => $time,
+                'is_valid' => false,
+            ]);
+            // ddd($_FILES['controlePicture']);
+            // then we give the picture the name of the id of its reccord in the database
+            $name = $raceResult->id . "." . $extension;
+            // we safe the picture on the server in the folder: 'controlPicture'
+            move_uploaded_file($_FILES['controlePicture']['tmp_name'], 'controlePictures/' . $name);
+            
+            // Storage::disk('public')->put('controlePicture/', $request->file('controlePicture'));
+            // $path = Storage::putFile('controlePictures', $request->file('controlePicture'));
+
+            // and at last we also safe that name in the database
+            RaceResult::where('id', $raceResult->id)->update([
+                'picture_name' => $name
+            ]);
         }
 
-        // When the race result is already existant we want to update it to prevent double records from the same user.
-        $raceResult = RaceResult::create([
-            'user_id' => $userId,
-            'race_id' => $raceId,
-            'seconds' => $time,
-            'is_valid' => false,
-        ]);
+        
+        
 
         $this->uploadRaceResultProof($raceResult, $extension, $request);
 
@@ -73,12 +88,12 @@ class UploadRaceController extends Controller
      */
     private function uploadRaceResultProof($raceResult, $extension, Request $request): void
     {
-        $pictureName = 'raceResultProof/' . $raceResult->id . '.' . $extension;
-        Storage::disk('local')
-            ->put($pictureName, $request->file('controlPicture')->getContent());
+        // $pictureName = 'raceResultProof/' . $raceResult->id . '.' . $extension;
+        // Storage::disk('local')
+        //     ->put($pictureName, $request->file('controlPicture')->getContent());
 
-        DB::table('race_results')
-            ->where('id', $raceResult->id)
-            ->update(['picture_name' => $raceResult->id . '.' . $extension]);
+        // DB::table('race_results')
+        //     ->where('id', $raceResult->id)
+        //     ->update(['picture_name' => $raceResult->id . '.' . $extension]);
     }
 }

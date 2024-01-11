@@ -109,7 +109,6 @@ class HomeController extends Controller
                     $nameFile = Auth::user()->id . "profile." . $ogExtension;
                     // taking the uploaded file and storing it in: "public/profilePictures under the predetermined name
                     move_uploaded_file($_FILES['profilePicture']['tmp_name'], 'profilePictures/' . $nameFile);
-                    // var_dump($request['newEmail']);
                 }
             }
 

@@ -10,6 +10,7 @@ use App\Models\Trophy;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Validation\UnauthorizedException;
 
 class AdminController extends Controller
@@ -19,16 +20,12 @@ class AdminController extends Controller
     public function __construct(private RaceCalculatorService $raceCalculatorService)
     {
     }
-    // private $date = Carbon::now();
-    private $date = "2024-03-29";
 
     public function index()
     {
         if (Auth::user()->admin === true) {
-             // $date = Carbon::now();
-            $date = "2024-03-29";
             $races = DB::table('races')
-            ->whereRaw('`end`<?', [$date])
+            ->whereRaw('`end`<?', [Carbon::now()])
             ->get();
             $raceResults = RaceResult::where('is_valid', false)->with('race')->get();
 
@@ -50,17 +47,17 @@ class AdminController extends Controller
             // check if there are reccords of trophies in the database, if so update them with new data otherwise create new entries
             if (Trophy::where('race_id', $request['raceId'])->exists()) {
 
-                Trophy::where('race_id', $request['raceId'])->update([
+                // update the gold medalist
+                Trophy::where('race_id', $request['raceId'])->where('trophy', "🥇")->update([
                     'user_id' => $raceResults[0]->user_id,
-                    'trophy' => "🥇",
                 ]);
-                Trophy::where('race_id', $request['raceId'])->update([
+                // update the silver medalist
+                Trophy::where('race_id', $request['raceId'])->where('trophy', "🥈")->update([
                     'user_id' => $raceResults[1]->user_id,
-                    'trophy' => "🥈",
                 ]);
-                Trophy::where('race_id', $request['raceId'])->update([
+                // update the bronze medalist
+                Trophy::where('race_id', $request['raceId'])->where('trophy', "🥉")->update([
                     'user_id' => $raceResults[2]->user_id,
-                    'trophy' => "🥉 ",
                 ]);
             } else {
 
@@ -80,13 +77,15 @@ class AdminController extends Controller
                     'trophy' => "🥉 ",
                 ]);
             }
+            // when the delete button is pressed we will delete all the trophies of this race
         } else if (isset($request['removeTrophies'])) {
                 Trophy::where('race_id', $request['raceId'])->delete();
 
         }
+        // when all te trophies are devided, deleted or updated, the user gets directed back to the admin page
         return view('admin', [
             'results' => RaceResult::where('is_valid', false)->with('race')->get(),
-            'races' => DB::table('races')->whereRaw('`end`<?', [$this->date])->get()
+            'races' => DB::table('races')->whereRaw('`end`<?', [Carbon::now()])->get()
         ]);
 
     }
@@ -105,6 +104,13 @@ class AdminController extends Controller
         } else if (isset($request['afgekeurd'])) {
             DB::table('race_results')->where('id', $request['id'])->delete();
         }
+
+        // deleting all the proof images when we do not need them anymore
+        if (File::exists('/controlePictures/' . $request['picture_name'])) {
+            File::delete('/controlePictures/' . $request['picture_name']);
+        }
+
+        
 
         return redirect(route('admin'))->with(['success' => 'successfully approved']);
     }

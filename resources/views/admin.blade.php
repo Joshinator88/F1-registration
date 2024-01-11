@@ -26,8 +26,6 @@
       </div>
     </div>
   </div>
-  <form nkl></form>
-
 
 
     @forelse($raceResults as $raceResult)
@@ -45,7 +43,7 @@
                      aria-labelledby="heading{{ $raceResult->id }}" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <div class="row justify-content-around text-center">
-                            <img src="{{ asset('storage/raceResultProof/'.$raceResult->id.'.jpg') }}"
+                            <img src="{{ '/controlePictures/' . $raceResult->picture_name }}"
                                  class="col-10 col-sm-4 col-xl-1 mb-2"
                                  alt="...">
                             <div class="row col-12 col-sm-4">
@@ -61,6 +59,7 @@
                                     <input class="btn btn-danger col-10 mt-2" type="submit" name="afgekeurd"
                                            value="afgekeurd">
                                     <input type="hidden" name="id" value="{{ $raceResult->id }}">
+                                    <input type="hidden" name="picture_name" value="{{ $raceResult->picture_name }}">
                                 </form>
                             </div>
                         </div>
