@@ -17,7 +17,7 @@
 .result-style{
     background-color: #e10600;
 }
-.uploadRaceButton{
+.uploadRaceButton, .F1{
     background-color: #e10600;
 }
 .uploadRaceButton:hover{
@@ -28,3 +28,10 @@
     border-color: #e10600;
 }
 
+.maxheight-220 {
+    max-height: 220px;
+}
+
+body {
+    background-color: black;
+}

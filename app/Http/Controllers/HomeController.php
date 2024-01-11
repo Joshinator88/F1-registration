@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profile;
+use App\Models\Trophy;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -38,6 +39,7 @@ class HomeController extends Controller
         }
             return view('home', [
                 'user' => Auth::user(),
+                'trophies' => Trophy::where('user_id', Auth::user()->id)
             ]);
 
     }
