@@ -23,7 +23,7 @@ class User extends Authenticatable implements CanResetPassword
         'name',
         'email',
         'password',
-
+        'admin'
     ];
 
     /**
@@ -44,6 +44,7 @@ class User extends Authenticatable implements CanResetPassword
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'admin' => 'boolean'
     ];
 
     public function profile()

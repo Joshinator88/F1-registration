@@ -30,7 +30,6 @@
                 <div class="col-sm-8 col-lg-4 my-2">
                     <a class="no-style" href="/user/{{ $user->id }}">
                         <div class="card">
-
                             @if ($user->profile?->profile_picture !== NULL)
                                 <img class="card-img-top" src="{{ $path }}" alt="profile picture of {{ $user->email }}">
                             @else
@@ -41,12 +40,9 @@
                                 <h3 class="card-title">{{ $user->name }}</h3>
                                 <p class="card-text">{{ $user->profile?->bio }}</p>
                             </div>
-
                         </div>
                     </a>
-
                 </div>
-
             @endforeach
         </div>
     </div>

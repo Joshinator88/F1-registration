@@ -25,7 +25,6 @@
                 {{-- stop the loop if the active card has been shown --}}
                 @break
             @endforeach
-
         </div>
         <div class="row justify-content-center">
             @foreach($races as $race)
