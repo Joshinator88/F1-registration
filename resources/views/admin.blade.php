@@ -1,6 +1,34 @@
 @extends ('layouts.app')
 
 @section('content')
+<div class="container">
+  <div class="accordion my-2" id="accordionOne">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Troffeeën vergeven
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          @foreach ($races as $race)
+            <form action="/addTrophies" class="inline" method="post">
+              @csrf
+              <div class="row text-center my-3">
+                <label for="{{$race->circuit}}" class="col-sm-3">{{$race->circuit}}</label>
+                <input name="giveTrophies" value="troffeeën uitdelen" type="submit" class="btn btn-success col-sm-3 m-auto">
+                <input name="removeTrophies" value="Troffeeën verwijderen" type="submit" class="btn btn-danger col-sm-3 m-auto">
+                <input type="hidden" name="raceId" value="{{ $race->id }}">
+              </div>
+            </form>
+          @endforeach
+        </div>
+      </div>
+    </div>
+  </div>
+  <form nkl></form>
+
+
 
     @forelse($raceResults as $raceResult)
         <div class="accordion mx-2" id="accordionExample">
@@ -44,5 +72,5 @@
         <h1>Er zijn nog geen resultaten geupload!</h1>
 
     @endforelse
-
+</div>
 @endsection

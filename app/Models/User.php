@@ -55,4 +55,8 @@ class User extends Authenticatable implements CanResetPassword
     public function race_result() {
         return $this->hasMany(RaceResult::class);
     }
+
+    public function trophy() {
+        return $this->hasMany(Trophy::class);
+    }
 }

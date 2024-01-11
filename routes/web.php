@@ -32,6 +32,7 @@ Route::get('/races', [App\Http\Controllers\RaceController::class, 'index'])->nam
 Route::get('/leaderboard', [App\Http\Controllers\LeaderboardController::class, 'index'])->name('leaderboard.index');
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
 Route::post('/admin', [App\Http\Controllers\AdminController::class, 'update'])->name('admin.update');
+Route::post('/addTrophies', [App\Http\Controllers\AdminController::class, 'trophyCeremony']);
 
 
 Route::get('/uploadrace', [App\Http\Controllers\UploadRaceController::class, 'index'])->name('upload.index');
