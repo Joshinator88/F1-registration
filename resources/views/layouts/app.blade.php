@@ -66,7 +66,7 @@
                             <a class="nav-link text-white" href="/users">users</a>
                         </li>
                         {{-- only show the admin link for the admin user --}}
-                        @if (Auth::user()->id == 1)
+                        @if (Auth::user()->admin === true)
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="/admin">Controle panel</a>
                             </li>

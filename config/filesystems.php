@@ -32,7 +32,7 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app/profilePictures'),
+            'root' => storage_path('app/'),
             'throw' => false,
         ],
 
@@ -71,6 +71,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('storage/raceResultProof') => storage_path('app/raceResultProof'),
     ],
 
 ];

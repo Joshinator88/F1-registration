@@ -10,6 +10,7 @@ use App\Models\Trophy;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\UnauthorizedException;
 
 class AdminController extends Controller
 {
@@ -21,17 +22,15 @@ class AdminController extends Controller
     // private $date = Carbon::now();
     private $date = "2024-03-29";
 
-    //
     public function index()
     {
-        if (Auth::user()->id == 1) {
-            return view('admin', [
-                'results' => RaceResult::where('is_valid', false)->with('race')->get(),
-                'races' => DB::table('races')->whereRaw('`end`<?', [$this->date])->get()
-            ]);
-        } else {
-            return view('home');
+        if (Auth::user()->admin === true) {
+            $raceResults = RaceResult::where('is_valid', false)->with('race')->get();
+
+            return view('admin', compact('raceResults'));
         }
+
+        throw new UnauthorizedException('You cannot view the administrator page.');
     }
 
     /**
@@ -59,7 +58,7 @@ class AdminController extends Controller
                     'trophy' => "🥉 ",
                 ]);
             } else {
-                
+
                 Trophy::create([
                     'user_id' => $raceResults[0]->user_id,
                     'race_id' => $request['raceId'],
@@ -84,7 +83,7 @@ class AdminController extends Controller
             'results' => RaceResult::where('is_valid', false)->with('race')->get(),
             'races' => DB::table('races')->whereRaw('`end`<?', [$this->date])->get()
         ]);
-        
+
     }
 
     /**
@@ -101,8 +100,7 @@ class AdminController extends Controller
         } else if (isset($request['afgekeurd'])) {
             DB::table('race_results')->where('id', $request['id'])->delete();
         }
-        return view('admin', [
-            'results' => RaceResult::where('is_valid', false)->with('race')->get()
-        ]);
+
+        return redirect(route('admin'))->with(['success' => 'successfully approved']);
     }
 }

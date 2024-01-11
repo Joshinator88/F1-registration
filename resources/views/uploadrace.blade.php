@@ -39,7 +39,7 @@
 
                 <div class="col-sm">
                     <label for="thousands" class="form-label ms-1">Mili seconden: </label>
-                    <input type="number" class="form-control" min="0" max="9999" name="thousands">
+                    <input type="number" class="form-control" min="0" max="999" name="thousands">
                 </div>
 
             </div>

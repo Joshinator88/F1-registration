@@ -11,9 +11,15 @@ class RaceCalculatorService
 {
     public function recalculateScore($raceId): void
     {
-        // the race leaderboard has to be sorted on time. on that sorted leaderboard the points get assigned.
-        // so we check the race id and limit the points to max 10 records ordered by ascending.
-        $raceResults = RaceResult::where('race_id', $raceId)->orderBy('seconds', 'asc')->get();
+        // Mysql has a standard that a `GROUP BY` is executed before `ORDER BY`,
+        // to resolve that issue we now  `GROUP BY` after `ORDER BY` with the laravel collection method unique.
+        // This method picks the first record that it encounters per unique key. In our case the user_id.
+        // Because we ordered the seconds query it will now pick the quickest record per user_id.
+        // See this page for more info: https://laravel.com/docs/10.x/collections#method-unique
+        $raceResults = RaceResult::where('race_id', $raceId)
+            ->orderBy('seconds')
+            ->get();
+        $raceResults = $raceResults->unique('user_id')->values();
         if(isset($raceResults[0])){$raceResults[0]->points = 25;}
         if(isset($raceResults[1])){$raceResults[1]->points = 18;}
         if(isset($raceResults[2])){$raceResults[2]->points = 15;}
