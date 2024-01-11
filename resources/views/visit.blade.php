@@ -8,17 +8,45 @@ $path = '/profilePictures/' . $user->id . 'profile.' . $user->profile?->profile_
 ?>
 
 <div class="container">
-    <div class="justify-content-center text-center">
+    <div class="justify-content-center text-center maxheight-220">
         @if ($user->profile?->profile_picture !== NULL)
-        <img src="{{ $path }}" alt="profile picture of {{ $user->email }}">
+        <img class="img-fluid" src="{{ $path }}" alt="profile picture of {{ $user->email }}">
         @else 
-        <img src="/profilePictures/noPicture.png" alt="profile picture of {{ $user->email }}">
+        <img class="img-fluid" src="/profilePictures/noPicture.png" alt="profile picture of {{ $user->email }}">
         @endif
     </div>        
-<div class="container mt-2">
-        <!-- displays the name of the user -->
-        <h3 class="m-auto">{{ $user->name }}</h3>
-</div>
+    <div class="container mt-4">
+        <div class="row mt-2">
+            <!-- displays the name of the user -->
+            <h3 class="mr-auto col-md-4">{{ $user->name }}</h3>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-dark m-auto col-md-4" data-bs-toggle="modal" data-bs-target="#trophies">
+            Bekijk trofeeën
+            </button>
+
+            <!-- Modal to show all the trophies of this user -->
+            <div class="modal fade" id="trophies" tabindex="-1" aria-labelledby="trophiesLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="trophiesLabel">Trofeeën</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            @forelse ($trophies as $trophy)
+                            <h1>{{$trophy->trophy}} {{$trophy->race->circuit}}</h1>
+                            @empty
+                            <h1>Nog geen trofeeën verdient...</h1>
+
+                            @endforelse
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 <!-- the ul is a list with information about the user -->
 <!-- these classes add margin to the top of the list and uses the bootstrap list-group(-flush) 

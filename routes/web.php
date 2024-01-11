@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Trophy;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +49,7 @@ Route::get('/users', function () {
 
 Route::get('user/{user}', function (User $user) {
     return view('visit', [
-        'user' => $user
+        'user' => $user,
+        'trophies' => Trophy::where('user_id', $user->id)->get()
     ]);
 });
