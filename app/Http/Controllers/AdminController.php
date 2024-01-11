@@ -25,9 +25,14 @@ class AdminController extends Controller
     public function index()
     {
         if (Auth::user()->admin === true) {
+             // $date = Carbon::now();
+            $date = "2024-03-29";
+            $races = DB::table('races')
+            ->whereRaw('`end`<?', [$date])
+            ->get();
             $raceResults = RaceResult::where('is_valid', false)->with('race')->get();
 
-            return view('admin', compact('raceResults'));
+            return view('admin', compact(['raceResults', 'races']));
         }
 
         throw new UnauthorizedException('You cannot view the administrator page.');

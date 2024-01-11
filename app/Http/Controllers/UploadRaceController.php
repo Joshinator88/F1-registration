@@ -18,7 +18,7 @@ class UploadRaceController extends Controller
         // $date = Carbon::now();
         $date = "2024-02-29";
         $getRow = DB::table('races')
-            ->whereRaw('`start`<=? and end>=?', [$date, $date])
+            ->whereRaw('`start`<=? and `end`>=?', [$date, $date])
             ->first();
 
         // and we pas that race object with the array

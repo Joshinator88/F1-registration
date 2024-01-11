@@ -7,15 +7,11 @@
     text-decoration: none;
 }
 .card-races{
+    height: 360px;
+    width: 400px;
     background-color: #e10600;
 }
-.navbarglobal{
-    background-color: #e10600;
-}
-.result-style{
-    background-color: #e10600;
-}
-.uploadRaceButton, .F1{
+.navbarglobal, .result-style, .uploadRaceButton {
     background-color: #e10600;
 }
 .uploadRaceButton:hover{
@@ -28,8 +24,4 @@
 
 .maxheight-220 {
     max-height: 220px;
-}
-
-body {
-    background-color: black;
 }
