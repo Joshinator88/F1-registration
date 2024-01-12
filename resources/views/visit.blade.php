@@ -9,6 +9,7 @@ $path = '/profilePictures/' . $user->id . 'profile.' . $user->profile?->profile_
 
 <div class="container">
     <div class="justify-content-center text-center maxheight-220">
+        <!-- a default picture will be displayed when this user has no profile picture set -->
         @if ($user->profile?->profile_picture !== NULL)
         <img class="img-fluid" src="{{ $path }}" alt="profile picture of {{ $user->email }}">
         @else 

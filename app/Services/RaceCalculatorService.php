@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\DB;
 
 class RaceCalculatorService
 {
+    /**
+     * this method will give each user the points they deserved based on their times they have driven
+     */
     public function recalculateScore($raceId): void
     {
         // Mysql has a standard that a `GROUP BY` is executed before `ORDER BY`,
@@ -46,6 +49,9 @@ class RaceCalculatorService
             ->update(['points' => 0]);
     }
 
+    /**
+     * returns the leaderboard based on the amount of points the users have
+     */
     public function calculateLeaderboard(): array
     {
         // Query the results based on a join from race_results to users.

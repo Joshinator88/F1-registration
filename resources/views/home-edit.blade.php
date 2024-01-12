@@ -2,8 +2,7 @@
 
 @section('content')
 
-<?php  ?>
-<!-- form waar de gebruiker zijn naam, favoriete circuit, geboorte datum en bio kan aanpassen -->
+<!-- form where the suser can change its name, favorite circuit, date of birth, profilePicture and bio -->
 <div class="container">
   <form method="post" enctype="multipart/form-data">
     @csrf

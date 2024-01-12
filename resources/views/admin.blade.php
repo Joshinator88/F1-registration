@@ -1,6 +1,7 @@
 @extends ('layouts.app')
 
 @section('content')
+<!-- here we made an arcordion button which is containing all the ended races-->
 <div class="container">
   <div class="accordion m-2" id="accordionOne">
     <div class="accordion-item">
@@ -11,23 +12,28 @@
       </h2>
       <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
         <div class="accordion-body">
-          @foreach ($races as $race)
+          <!-- here we map over all the ended races give each race 2 buttons, one for deleting and one for adding the trophies to that race -->
+          @forelse ($races as $race)
             <form action="/addTrophies" class="inline" method="post">
               @csrf
               <div class="row text-center my-3">
                 <label for="{{$race->circuit}}" class="col-sm-3">{{$race->circuit}}</label>
                 <input name="giveTrophies" value="troffeeën uitdelen" type="submit" class="btn btn-success col-sm-3 m-auto">
                 <input name="removeTrophies" value="Troffeeën verwijderen" type="submit" class="btn btn-danger col-sm-3 m-auto">
+                <!-- we send the race_id allong to delete update or create the trophies for this race -->
                 <input type="hidden" name="raceId" value="{{ $race->id }}">
               </div>
             </form>
-          @endforeach
+            <!-- when there are no races ended w will show the following -->
+            @empty
+            <h2>Er zijn nog geen races afgelopen dus er kunnen nog geen troffeeën worden uitgedeelt</h2>
+          @endforelse
         </div>
       </div>
     </div>
   </div>
 
-
+<!-- when there are raceresults that need to be validated they will get stored in their own accordion -->
     @forelse($raceResults as $raceResult)
         <div class="accordion mx-2" id="accordionExample">
             <div class="accordion-item">
@@ -39,6 +45,7 @@
                         | User: {{ $raceResult->user->name }}
                     </button>
                 </h2>
+
                 <div id="collapse{{ $raceResult->id }}" class="accordion-collapse collapse"
                      aria-labelledby="heading{{ $raceResult->id }}" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
@@ -68,7 +75,7 @@
             </div>
         </div>
     @empty
-        <h1>Er zijn nog geen resultaten geupload!</h1>
+        <h1 class="mx-3">Er zijn nog geen resultaten geupload!</h1>
 
     @endforelse
 </div>

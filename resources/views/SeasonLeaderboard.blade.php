@@ -15,8 +15,10 @@
                         </tr>
                         </thead>
                         <tbody>
+                            <!-- loop over leaderboard(top ten users) and get the username and points of the users -->
                         @foreach($leaderboard as $userName => $points)
                             <tr>
+                                <!-- because index starts at zero do the index+1 -->
                                 <th scope="row"> {{$loop->index + 1}}</th>
                                 <td>{{ $userName}}</td>
                                 <td>{{ $points }}</td>

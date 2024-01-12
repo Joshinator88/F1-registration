@@ -24,6 +24,7 @@ class AdminController extends Controller
     public function index()
     {
         if (Auth::user()->admin === true) {
+            $date = "2024-04-04";
             $races = DB::table('races')
             ->whereRaw('`end`<?', [Carbon::now()])
             ->get();
@@ -95,6 +96,7 @@ class AdminController extends Controller
      */
     public function update(Request $request)
     {
+        // check what button is pressed and then make a raceresult valid or delete it based on the input
         if (isset($request['goedgekeurd'])) {
             DB::table('race_results')->where('id', $request['id'])->update([
                 'is_valid' => true
@@ -105,7 +107,7 @@ class AdminController extends Controller
             DB::table('race_results')->where('id', $request['id'])->delete();
         }
 
-        // deleting all the proof images when we do not need them anymore
+        // when update method is called then we have no need anymore for the pictures so we delete them
         if (File::exists('/controlePictures/' . $request['picture_name'])) {
             File::delete('/controlePictures/' . $request['picture_name']);
         }

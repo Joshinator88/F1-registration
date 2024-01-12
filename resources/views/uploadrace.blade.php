@@ -2,6 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- the if statements are to display an error when there is one the error wont exist and so would not interfere with the styling -->
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     @if (isset($error))
         <div class="alert alert-danger text-center" role="alert">
@@ -47,8 +48,8 @@
         </div>
 
         <div class="mb-3">
-            <!-- een file input field waar een user een bewijs foto kan uploaden,
-            de div onderin beschrijft waar de user op moet letten bij het maken van de foto  -->
+            <!-- a file input field where the user can upload a proof image, the div underneath will 
+            discribe where the user have to pay attention to when taking the picture -->
             <label for="controlPicture" class="form-label">Als bewijs, upload hier een selfie met uw resultaten</label>
             <input type="file" class="form-control" name="controlePicture" id="controlePicture" aria-describedby="pictureHelp" required>
             <div id="pictureHelp" class="form-text">Zorg er voor dat jij zelf, de track en je tijd duidelijk zichtbaar

@@ -7,6 +7,7 @@ use App\Services\RaceCalculatorService;
 class LeaderboardController extends Controller
 {
     public function __construct(
+        // create an instance of the raceCalculatorService so that we can use its methods
         private RaceCalculatorService $raceCalculatorService
     ) {
     }

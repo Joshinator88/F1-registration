@@ -30,6 +30,7 @@
                 <div class="col-sm-8 col-lg-4 my-2">
                     <a class="no-style" href="/user/{{ $user->id }}">
                         <div class="card">
+                            <!-- when the user does not have set a profile picture, the user will have a default picture  -->
                             @if ($user->profile?->profile_picture !== NULL)
                                 <img class="card-img-top" src="{{ $path }}" alt="profile picture of {{ $user->email }}">
                             @else
