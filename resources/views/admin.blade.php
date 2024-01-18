@@ -50,7 +50,7 @@
                      aria-labelledby="heading{{ $raceResult->id }}" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <div class="row justify-content-around text-center">
-                            <img src="{{ '/controlePictures/' . $raceResult->picture_name }}"
+                            <img src="{{ '/controlPictures/' . $raceResult->picture_name }}"
                                  class="col-10 col-sm-4 col-xl-1 mb-2"
                                  alt="...">
                             <div class="row col-12 col-sm-4">
