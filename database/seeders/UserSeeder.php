@@ -10,13 +10,23 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        $rick = User::where('email', 'rickblaas@gmail.com')->first();
+        $rick = User::where('email', 'rickblaas@live.nl')->first();
 
         if (!$rick) {
             User::factory(1)->create([
-                'email' => 'rickblaas@gmail.com',
-                'password' => Hash::make('lol12345'),
+                'email' => 'rickblaas@live.nl',
+                'password' => Hash::make('Password'),
                 'name' => 'Rick Blaas',
+                'admin' => false
+            ]);
+        }
+        $joshua = User::where('email', 'joshua@hotmail.com')->first();
+
+        if (!$joshua) {
+            User::factory(1)->create([
+                'email' => 'joshua@hotmail.com',
+                'password' => Hash::make('Password'),
+                'name' => 'Joshua de Bruijn',
                 'admin' => false
             ]);
         }
@@ -30,6 +40,9 @@ class UserSeeder extends Seeder
                 'name' => 'admin',
                 'admin' => true
             ]);
+        }
+        if (User::count() <= 22) {
+            User::factory(22)->create();
         }
     }
 }

@@ -7,8 +7,6 @@
     text-decoration: none;
 }
 .card-races{
-    height: 360px;
-    width: 400px;
     background-color: #e10600;
 }
 .result-style, .uploadRaceButton{
@@ -22,6 +20,10 @@
     border-color: #e10600;
 }
 
+.navbar {
+    background-color: #1a202c;
+}
+
 .title {
     color: #e10600 !important;
     font-weight: 700 ;
@@ -29,8 +31,4 @@
 }
 .maxheight-220 {
     max-height: 220px;
-}
-
-.navbarglobal {
-    background-color: rgb(40 40 40);
 }
