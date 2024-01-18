@@ -21,7 +21,7 @@
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light shadow-sm navbarglobal">
         <div class="container">
-            <a class="navbar-brand text-white" href="{{ url('/home') }}">
+            <a class="navbar-brand title" href="{{ url('/home') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
