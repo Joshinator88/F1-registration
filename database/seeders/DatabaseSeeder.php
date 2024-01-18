@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            RaceSeeder::class
+            RaceSeeder::class,
+            RaceResultSeeder::class
         ]);
     }
 }

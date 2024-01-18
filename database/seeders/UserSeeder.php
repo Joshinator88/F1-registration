@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
             ]);
         }
         if (User::count() <= 22) {
-            User::factory(23)->create();
+            User::factory(22)->create();
         }
     }
 }
