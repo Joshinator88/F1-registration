@@ -44,7 +44,7 @@ class AdminController extends Controller
             // only look at the validated races
             // get the top three performers on this circuit and hand them the trophies
             $raceResultsRaw = RaceResult::where('is_valid', true)->orderBy('seconds', 'asc')->get();
-            $raceResults = $raceResultsRaw->unique('user_id')->take(3)->get();
+            $raceResults = $raceResultsRaw->unique('user_id')->take(3);
             // check if there are reccords of trophies in the database, if so update them with new data otherwise create new entries
             if (Trophy::where('race_id', $request['raceId'])->exists()) {
 
@@ -75,7 +75,7 @@ class AdminController extends Controller
                 Trophy::create([
                     'user_id' => $raceResults[2]->user_id,
                     'race_id' => $request['raceId'],
-                    'trophy' => "🥉 ",
+                    'trophy' => "🥉",
                 ]);
             }
             // when the delete button is pressed we will delete all the trophies of this race
@@ -84,10 +84,11 @@ class AdminController extends Controller
 
         }
         // when all te trophies are devided, deleted or updated, the user gets directed back to the admin page
-        return view('admin', [
-            'results' => RaceResult::where('is_valid', false)->with('race')->get(),
-            'races' => DB::table('races')->whereRaw('`end`<?', [Carbon::now()])->get()
-        ]);
+        return redirect('admin');
+//            view('admin', [
+//            'results' => RaceResult::where('is_valid', false)->with('race')->get(),
+//            'races' => DB::table('races')->whereRaw('`end`<?', [Carbon::now()])->get()
+//        ]);
 
     }
 
@@ -112,7 +113,7 @@ class AdminController extends Controller
             File::delete('/controlePictures/' . $request['picture_name']);
         }
 
-        
+
 
         return redirect(route('admin'))->with(['success' => 'successfully approved']);
     }
