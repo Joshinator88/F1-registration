@@ -39,7 +39,8 @@ class RaceUploadTest extends TestCase
 
         $response->assertStatus(302)->assertSessionDoesntHaveErrors();
         $this->assertDatabaseCount('race_results', 1);
-        $this->assertRaceResultProofUploaded(1);
+        $raceResult = RaceResult::first();
+        $this->assertRaceResultProofUploaded($raceResult->id);
     }
 
     public function testShouldCreateRaceResultWhenNewResultIsFasterThanPreviousRaceResult(): void
@@ -77,7 +78,7 @@ class RaceUploadTest extends TestCase
 
     private function assertRaceResultProofUploaded($raceResult): void
     {
-        $expectedRaceResultFileName = 'raceResultProof/'. $raceResult . '.' . 'jpg';
+        $expectedRaceResultFileName = 'controlPictures/'. $raceResult . '.' . 'jpg';
         Storage::assertExists($expectedRaceResultFileName);
     }
 }

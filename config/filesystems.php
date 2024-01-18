@@ -71,7 +71,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
-        public_path('storage/raceResultProof') => storage_path('app/raceResultProof'),
+        public_path('controlPictures') => storage_path('app/controlPictures'),
     ],
 
 ];

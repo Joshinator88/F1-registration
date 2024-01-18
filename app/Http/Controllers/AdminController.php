@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Race;
 use App\Services\RaceCalculatorService;
 use Illuminate\Support\Facades\Auth;
 use App\Models\RaceResult;
@@ -10,7 +9,7 @@ use App\Models\Trophy;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\UnauthorizedException;
 
 class AdminController extends Controller
@@ -85,11 +84,6 @@ class AdminController extends Controller
         }
         // when all te trophies are devided, deleted or updated, the user gets directed back to the admin page
         return redirect('admin');
-//            view('admin', [
-//            'results' => RaceResult::where('is_valid', false)->with('race')->get(),
-//            'races' => DB::table('races')->whereRaw('`end`<?', [Carbon::now()])->get()
-//        ]);
-
     }
 
     /**
@@ -97,23 +91,20 @@ class AdminController extends Controller
      */
     public function update(Request $request)
     {
+        $raceResult = RaceResult::findOrFail($request['id']);
+
         // check what button is pressed and then make a raceresult valid or delete it based on the input
         if (isset($request['goedgekeurd'])) {
-            DB::table('race_results')->where('id', $request['id'])->update([
-                'is_valid' => true
-            ]);
-            $raceResult = RaceResult::findOrFail($request['id']);
+            $raceResult->is_valid = true;
+            $raceResult->save();
             $this->raceCalculatorService->recalculateScore($raceResult->race_id);
         } else if (isset($request['afgekeurd'])) {
-            DB::table('race_results')->where('id', $request['id'])->delete();
+            $raceResult->delete();
         }
-
         // when update method is called then we have no need anymore for the pictures so we delete them
-        if (File::exists('/controlePictures/' . $request['picture_name'])) {
-            File::delete('/controlePictures/' . $request['picture_name']);
+        if (Storage::disk('local')->exists('controlPictures/' . $raceResult->picture_name)) {
+            Storage::disk('local')->delete('controlPictures/'.$raceResult->picture_name);
         }
-
-
 
         return redirect(route('admin'))->with(['success' => 'successfully approved']);
     }
